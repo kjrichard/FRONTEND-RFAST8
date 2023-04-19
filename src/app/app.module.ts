@@ -14,6 +14,11 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 import { InfanciaComponent } from './pages/infancia/infancia.component';
+import { PrimeraInfanciaComponent } from './pages/primera-infancia/primera-infancia.component';
+import { AdolecenciaComponent } from './pages/adolecencia/adolecencia.component';
+import { JuventudComponent } from './pages/juventud/juventud.component';
+import { AdultezComponent } from './pages/adultez/adultez.component';
+import { VejezComponent } from './pages/vejez/vejez.component';
 
 @NgModule({
   imports: [
@@ -26,7 +31,7 @@ import { InfanciaComponent } from './pages/infancia/infancia.component';
     AppRoutingModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, InfanciaComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, InfanciaComponent, PrimeraInfanciaComponent, AdolecenciaComponent, JuventudComponent, AdultezComponent, VejezComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -15,7 +15,7 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-chart-pie-36",
     class: ""
   },
-  {
+  /*{
     path: "/icons",
     title: "Icons",
     rtlTitle: "الرموز",
@@ -47,24 +47,52 @@ export const ROUTES: RouteInfo[] = [
     path: "/tables",
     title: "Table List",
     rtlTitle: "قائمة الجدول",
-    icon: "icon-user-run",
-    class: ""
-  },
-  {
-    path: "/tables",
-    title: "Infancia",
-    rtlTitle: "قائمة الجدول",
     icon: "icon-puzzle-10",
+    class: ""
+  },*/
+  {
+    path: "/primera-infancia",
+    title: "primera Infancia",
+    rtlTitle: "قائمة الجدول",
+    icon: "icon-bold",
     class: ""
   },
   {
     path: "/infancia",
     title: "Infancia",
     rtlTitle: "قائمة الجدول",
-    icon: "icon-puzzle-10",
+    icon: "icon-controller",
     class: ""
   },
   {
+    path: "/adolecencia",
+    title: "Adolecencia",
+    rtlTitle: "قائمة الجدول",
+    icon: "icon-user-run",
+    class: ""
+  },
+  {
+    path: "/juventud",
+    title: "Juventud",
+    rtlTitle: "قائمة الجدول",
+    icon: "icon-trophy",
+    class: ""
+  },
+  {
+    path: "/adultez",
+    title: "Adultez",
+    rtlTitle: "قائمة الجدول",
+    icon: "icon-single-02",
+    class: ""
+  },
+  {
+    path: "/vejez",
+    title: "Vejez",
+    rtlTitle: "قائمة الجدول",
+    icon: "icon-sound-wave",
+    class: ""
+  },
+  /*{
     path: "/typography",
     title: "Typography",
     rtlTitle: "طباعة",
@@ -77,7 +105,7 @@ export const ROUTES: RouteInfo[] = [
     rtlTitle: "ار تي ال",
     icon: "icon-world",
     class: ""
-  }
+  }*/
 ];
 
 @Component({

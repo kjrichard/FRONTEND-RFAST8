@@ -18,10 +18,10 @@ export class InfanciaComponent implements OnInit {
   obtenerInfancia() {
     this.infanciaService.getPrimeraInfancia().subscribe( ( res: any ) => {
 
-      
-       this.infancia = res.data[0];
+
+       this.infancia = res.data;
        console.log( res );
-       
+
     }
     );
   }
