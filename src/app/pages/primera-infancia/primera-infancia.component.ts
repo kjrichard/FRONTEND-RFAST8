@@ -1,3 +1,4 @@
+import { PrimeraInfanciaService } from './../../services/primera-infancia.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./primera-infancia.component.scss']
 })
 export class PrimeraInfanciaComponent implements OnInit {
+  public primeraInfancia: any = [];
 
-  constructor() { }
+  constructor(private primeraInfanciaService: PrimeraInfanciaService) { }
 
   ngOnInit(): void {
+    this.obtenerPrimeraInfancia();
+  }
+
+  obtenerPrimeraInfancia() {
+    this.primeraInfanciaService.getPrimeraInfancia().subscribe(( res: any ) =>{
+
+      this.primeraInfancia = res.data;
+      console.log( res );
+
+    });
   }
 
 }
+
+export class ZeroConfigComponent {}

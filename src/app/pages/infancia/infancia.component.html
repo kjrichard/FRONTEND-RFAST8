@@ -5,70 +5,52 @@
     <div class=" col-md-12">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">Simple Table</h4>
+          <h4 class=" card-title">{{ islast }}</h4>
         </div>
         <div class=" card-body">
+          <div></div>
           <div class="table-responsive">
             <table class="table" id="">
               <thead>
                 <tr>
-                  <th>COD-IPS</th>
-                  <th>NOM-IPS</th>
-                  <th>TIP-DOC</th>
-                  <th>NUM-DOC</th>
-                  <th>POB-ESP</th>
+                  <th>TIPO_DOCUMENTO</th>
+                  <th>NUMERO_DOCUMENTO</th>
                   <th>APELLIDO1</th>
                   <th>APELLIDO2</th>
                   <th>NOMBRE1</th>
                   <th>NOMBRE2</th>
-                  <th>SEXO</th>
-                  <th>EMBARAZO</th>
-                  <th>TIP-DIS</th>
-                  <th>GRA-DIS</th>
-                  <th>NOM-IPS</th>
                   <th>DIRECCION</th>
                   <th>TELEFONO</th>
-                  <th>COD-IPS</th>
-                  <th>NOM-IPS</th>
-                  <th>TIP-DOC</th>
-                  <th>NUM-DOC</th>
-                  <th>COD-IPS</th>
-                  <th>NOM-IPS</th>
-                  <th>TIP-DOC</th>
-                  <th>NUM-DOC</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor ="let table of infancia">
-                  <td>{{ table.IPS }}</td>
-                  <td>{{ table.NOMBRE_IPS }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{ table.TIPO_DOCUMENTO }}</td>
+                  <td>{{ table.NUMERO_DOCUMENTO }}</td>
+                  <td>{{ table.APELLIDO1 }}</td>
+                  <td>{{ table.APELLIDO2 }}</td>
+                  <td>{{ table.NOMBRE1 }}</td>
+                  <td>{{ table.NOMBRE2 }}</td>
+                  <td>{{ table.DIRECCION_RECIDENCIA }}</td>
+                  <td>{{ table.TELEFONO_RECIDENCIA }}</td>
                 </tr>
 
               </tbody>
             </table>
           </div>
+        </div>
+        <div class="card-footer">
+          <p>total: {{ total }}</p>
+          <div>
+            <button class="btn btn-danger btn-block" [disabled]="page==1" (click)=" pageAtras()"> Atras </button>
+          </div>
+          <p> {{ page }} - {{ totalpage }}</p>
+          <div>
+            <button class="btn btn-danger btn-block" [disabled]="islast" (click)="pageSiguiente()"> Siguiente </button>
+          </div>
+        </div>
+        <div>
+          <!-- <button _ngcontent-c7="" class="btn btn-primary btn-block">Top Left</button> -->
         </div>
       </div>
     </div>
