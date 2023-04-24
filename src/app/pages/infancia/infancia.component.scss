@@ -2,8 +2,30 @@
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 700px;
+  border-spacing: 0;
+  margin-top: 1rem;
 }
 
 .table-responsive::-webkit-scrollbar{
   display: none;
+}
+.Encabezado{
+  text-align: center;
+}
+tbody{
+  tr{
+    td{
+      padding: 10px;
+      text-align: center;
+    }
+  }
+}
+
+.darkgreen{
+  background-color: darkgreen;
+ // color-interpolation-filters: 10px;
+  //align-items: center;
+}
+.darkred{
+  background-color: darkred;
 }

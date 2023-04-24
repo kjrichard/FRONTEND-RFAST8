@@ -42,14 +42,14 @@ export const ROUTES: RouteInfo[] = [
     rtlTitle: "ملف تعريفي للمستخدم",
     icon: "icon-single-02",
     class: ""
-  },
+  },*/
   {
     path: "/tables",
     title: "Table List",
     rtlTitle: "قائمة الجدول",
     icon: "icon-puzzle-10",
     class: ""
-  },*/
+  },
   {
     path: "/primera-infancia",
     title: "primera Infancia",

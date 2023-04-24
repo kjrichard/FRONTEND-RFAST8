@@ -5,52 +5,58 @@
     <div class=" col-md-12">
       <div class=" card">
         <div class=" card-header">
-          <h4 class=" card-title">{{ islast }}</h4>
+          <h4 class=" card-title">{{ infancia[0].NOMBRE }} : {{ total  }}</h4>
         </div>
         <div class=" card-body">
           <div></div>
           <div class="table-responsive">
-            <table class="table" id="">
+            <table class="table table-bordered" id="">
               <thead>
-                <tr>
-                  <th>TIPO_DOCUMENTO</th>
+                <tr class="Encabezado">
                   <th>NUMERO_DOCUMENTO</th>
                   <th>APELLIDO1</th>
                   <th>APELLIDO2</th>
                   <th>NOMBRE1</th>
                   <th>NOMBRE2</th>
-                  <th>DIRECCION</th>
                   <th>TELEFONO</th>
+                  <th>CODIGO</th>
+                  <th>ATENDIDO</th>
+                  <th>CUPS</th>
+                  <th>VER</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="data">
                 <tr *ngFor ="let table of infancia">
-                  <td>{{ table.TIPO_DOCUMENTO }}</td>
                   <td>{{ table.NUMERO_DOCUMENTO }}</td>
                   <td>{{ table.APELLIDO1 }}</td>
                   <td>{{ table.APELLIDO2 }}</td>
                   <td>{{ table.NOMBRE1 }}</td>
                   <td>{{ table.NOMBRE2 }}</td>
-                  <td>{{ table.DIRECCION_RECIDENCIA }}</td>
                   <td>{{ table.TELEFONO_RECIDENCIA }}</td>
+                  <td>{{ table.CODIGO }}</td>
+                  <td [ngClass]="table.ATENDIDO == true ? 'darkgreen' : 'darkred'">{{ table.ATENDIDO }}</td>
+                  <td [ngClass]="table.ATENDIDO == true ? 'darkgreen' : 'darkred'">{{ table.CUPS }}</td>
+                  <td>
+                    <button class="tim-icons travel_info">
+                      <i ></i>
+                    </button>
+                  </td>
                 </tr>
-
               </tbody>
             </table>
           </div>
         </div>
         <div class="card-footer">
-          <p>total: {{ total }}</p>
-          <div>
-            <button class="btn btn-danger btn-block" [disabled]="page==1" (click)=" pageAtras()"> Atras </button>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="mr-lg-2">
+              <p>total: {{ total }}</p>
+            </div>
+            <button class="btn btn-danger btn-sm mr-lg-2" [disabled]="page==1" (click)="pageAtras()"> Atras </button>
+            <div class="mr-lg-2">
+              <p> {{ page }} - {{ totalpage }}</p>
+            </div>
+            <button class="btn btn-danger btn-sm" [disabled]="islast" (click)="pageSiguiente()"> Siguiente </button>
           </div>
-          <p> {{ page }} - {{ totalpage }}</p>
-          <div>
-            <button class="btn btn-danger btn-block" [disabled]="islast" (click)="pageSiguiente()"> Siguiente </button>
-          </div>
-        </div>
-        <div>
-          <!-- <button _ngcontent-c7="" class="btn btn-primary btn-block">Top Left</button> -->
         </div>
       </div>
     </div>
