@@ -1,11 +1,32 @@
 <!--<p>primera-infancia works!</p>-->
 
+<!-- <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status" *ngIf="loader">
+  <span class="visually-hidden">Loading...</span>
+</div> -->
+
 <div class=" content">
   <div class=" row">
     <div class=" col-md-12">
       <div class=" card">
-        <div class=" card-header">
-          <h4 class=" card-title">{{ infancia[0].NOMBRE }} : {{ total  }}</h4>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <div class=" card-header">
+            <h4 class=" card-title">{{ infancia[0].NOMBRE }} : {{ total  }}</h4>
+          </div>
+          <div class=" card-header">
+            <h4 class=" card-title"> ATENDIDOS : {{ atendidos[0].atendidos  }}</h4>
+          </div>
+          <div class=" card-header">
+            <h4 class=" card-title"> SIN ATENCIÓN : {{ noAtendidos[0].noAtendidos  }}</h4>
+          </div>
+
+          <button
+          class=" btn btn-link"data-target="#searchModal"data-toggle="modal"
+          (click)="open(content)"
+          id="search-button">
+          <i class=" tim-icons icon-zoom-split"> </i>
+          <span class=" d-lg-none d-md-block"> Search </span>
+        </button>
+
         </div>
         <div class=" card-body">
           <div></div>
@@ -37,8 +58,8 @@
                   <td [ngClass]="table.ATENDIDO == true ? 'darkgreen' : 'darkred'">{{ table.ATENDIDO }}</td>
                   <td [ngClass]="table.ATENDIDO == true ? 'darkgreen' : 'darkred'">{{ table.CUPS }}</td>
                   <td>
-                    <button class="tim-icons travel_info">
-                      <i ></i>
+                    <button class=" tim-icons icon-bullet-list-67 btn btn-danger btn-sm">
+                      <i></i>
                     </button>
                   </td>
                 </tr>
@@ -128,3 +149,25 @@
     </div> -->
   </div>
 </div>
+<ng-template #content let-modal>
+  <div class=" modal-header">
+    <input
+      class=" form-control"
+      id="inlineFormInputGroup"
+      placeholder="SEARCH"
+      type="text"
+    />
+
+    <button
+      aria-label="Close"
+      class=" close"
+      data-dismiss="modal"
+      type="button"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <i class=" tim-icons icon-simple-remove"> </i>
+    </button>
+  </div>
+
+</ng-template>
+
