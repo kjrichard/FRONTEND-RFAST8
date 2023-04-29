@@ -1,14 +1,17 @@
 <!--<p>primera-infancia works!</p>-->
+<div>
 
-<!-- <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status" *ngIf="loader">
-  <span class="visually-hidden">Loading...</span>
-</div> -->
+</div>
+<div class="spinner-grow" role="status" *ngIf="!spinner">
+  <span class="visually-hidden">LOADING...</span>
+</div>
+
 
 <div class=" content">
   <div class=" row">
     <div class=" col-md-12">
       <div class=" card">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div *ngIf="spinner" class="d-grid gap-2 d-md-flex justify-content-md-end">
           <div class=" card-header">
             <h4 class=" card-title">{{ infancia[0].NOMBRE }} : {{ total  }}</h4>
           </div>
@@ -34,6 +37,7 @@
             <table class="table table-bordered" id="">
               <thead>
                 <tr class="Encabezado">
+                  <th>EDAD</th>
                   <th>NUMERO_DOCUMENTO</th>
                   <th>APELLIDO1</th>
                   <th>APELLIDO2</th>
@@ -48,6 +52,7 @@
               </thead>
               <tbody class="data">
                 <tr *ngFor ="let table of infancia">
+                  <td>{{ table.EDAD }}</td>
                   <td>{{ table.NUMERO_DOCUMENTO }}</td>
                   <td>{{ table.APELLIDO1 }}</td>
                   <td>{{ table.APELLIDO2 }}</td>
@@ -58,8 +63,7 @@
                   <td [ngClass]="table.ATENDIDO == true ? 'darkgreen' : 'darkred'">{{ table.ATENDIDO }}</td>
                   <td [ngClass]="table.ATENDIDO == true ? 'darkgreen' : 'darkred'">{{ table.CUPS }}</td>
                   <td>
-                    <button class=" tim-icons icon-bullet-list-67 btn btn-danger btn-sm">
-                      <i></i>
+                    <button (click)="modalOpen(pacientesModal, table)" class=" tim-icons icon-bullet-list-67 btn btn-danger btn-sm">
                     </button>
                   </td>
                 </tr>
@@ -81,93 +85,75 @@
         </div>
       </div>
     </div>
-    <!-- <div class=" col-md-12">
-      <div class=" card card-plain">
-        <div class=" card-header">
-          <h4 class=" card-title">Table on Plain Background</h4>
-          <p class=" category">Here is a subtitle for this table</p>
-        </div>
-        <div class=" card-body">
-          <div class=" table-responsive">
-            <table class=" table tablesorter" id="">
-              <thead class=" text-primary">
-                <tr>
-                  <th>Name</th>
-                  <th>Country</th>
-                  <th>City</th>
-                  <th class=" text-center">Salary</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Dakota Rice</td>
-                  <td>Niger</td>
-                  <td>Oud-Turnhout</td>
-                  <td class=" text-center">$36,738</td>
-                </tr>
-                <tr>
-                  <td>Minerva Hooper</td>
-                  <td>CuraÃ§ao</td>
-                  <td>Sinaai-Waas</td>
-                  <td class=" text-center">$23,789</td>
-                </tr>
-                <tr>
-                  <td>Sage Rodriguez</td>
-                  <td>Netherlands</td>
-                  <td>Baileux</td>
-                  <td class=" text-center">$56,142</td>
-                </tr>
-                <tr>
-                  <td>Philip Chaney</td>
-                  <td>Korea, South</td>
-                  <td>Overland Park</td>
-                  <td class=" text-center">$38,735</td>
-                </tr>
-                <tr>
-                  <td>Doris Greene</td>
-                  <td>Malawi</td>
-                  <td>Feldkirchen in KÃ¤rnten</td>
-                  <td class=" text-center">$63,542</td>
-                </tr>
-                <tr>
-                  <td>Mason Porter</td>
-                  <td>Chile</td>
-                  <td>Gloucester</td>
-                  <td class=" text-center">$78,615</td>
-                </tr>
-                <tr>
-                  <td>Jon Porter</td>
-                  <td>Portugal</td>
-                  <td>Gloucester</td>
-                  <td class=" text-center">$98,615</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
+<!-- buscar paciente -->
 <ng-template #content let-modal>
   <div class=" modal-header">
     <input
       class=" form-control"
       id="inlineFormInputGroup"
       placeholder="SEARCH"
-      type="text"
-    />
-
-    <button
-      aria-label="Close"
-      class=" close"
-      data-dismiss="modal"
-      type="button"
-      (click)="modal.dismiss('Cross click')"
-    >
-      <i class=" tim-icons icon-simple-remove"> </i>
+      (keyup)="buscar($event)"
+      type="text"/>
+    <button aria-label="Close"class=" close"data-dismiss="modal"type="button"(click)="modal.dismiss('Cross click')">
+      <i class=" tim-icons icon-simple-remove"></i>
+    </button>
+    <button aria-label="Close"class=" close"data-dismiss="modal"type="button"(click)="buscarInfancia(); modal.dismiss('Cross click')"
+    type="button" class="btn btn-light">
+      buscar
     </button>
   </div>
-
+  <div class="modal-body">
+    <p *ngFor="let item of arrayId">{{ item }}</p>
+  </div>
 </ng-template>
+<!-- fin buscar paciente -->
 
+<!--detalles del paciente-->
+<div class="modal-content">
+  <ng-template #pacientesModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">HISTORIA DEL PACIENTE</h4>
+      <button type="button"  class=" tim-icons icon-simple-remove btn btn-light" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class=" card-body">
+        <ul class="list-group">
+          <li class="list-group-item"><b>CÓDIGO IPS:</b> {{ paciente.IPS }}</li>
+          <li class="list-group-item"><b>NOMBRE IPS:</b> {{ paciente.NOMBRE_IPS }}</li>
+          <li class="list-group-item"><b>TIPO DE DOCUMENTO:</b> {{ paciente.TIPO_DOCUMENTO }}</li>
+          <li class="list-group-item"><b>NÚMERO DOCUMENTO:</b> {{ paciente.NUMERO_DOCUMENTO }}</li>
+          <li class="list-group-item"><b>POBLACIÓN ESPECIAL:</b> {{ paciente.POBLACION_ESPECIAL }}</li>
+          <li class="list-group-item"><b>APELLIDO1:</b> {{ paciente.APELLIDO1 }}</li>
+          <li class="list-group-item"><b>APELLIDO2:</b> {{ paciente.APELLIDO2 }}</li>
+          <li class="list-group-item"><b>NOMBRE1:</b> {{ paciente.NOMBRE1 }}</li>
+          <li class="list-group-item"><b>NOMBRE2:</b> {{ paciente.NOMBRER2 }}</li>
+          <li class="list-group-item"><b>FECHA NACIMIENTO:</b> {{ paciente.FECHA_NACIMIENTO }}</li>
+          <li class="list-group-item"><b>GENERO:</b> {{ paciente.SEXO }}</li>
+          <li class="list-group-item"><b>EMBARAZO:</b> {{ paciente.EMBARAZO }}</li>
+          <li class="list-group-item"><b>TIPO DE DISCAPACIDAD</b>: {{ paciente.TIPO_DISCAPACIDAD }}</li>
+          <li class="list-group-item"><b>GRADO DE DISCAPACIDAD:</b> {{ paciente.GRADO_DISCAPACIDAD }}</li>
+          <li class="list-group-item"><b>DIRECCIÓN DE RESIDENCIA:</b> {{ paciente.DIRECCION_RECIDENCIA }}</li>
+          <li class="list-group-item"><b>TELÉFONO MÓVIL:</b> {{ paciente.TELEFONO_RECIDENCIA }}</li>
+          <li class="list-group-item"><b>CÓDIGO DEL BARRIO:</b> {{ paciente.CODIGO_BARRIO }}</li>
+          <li class="list-group-item"><b>COMUNA:</b> {{ paciente.COMUNA }}</li>
+          <li class="list-group-item"><b>NOMBRE DEL BARRIO:</b> {{ paciente.BARRIO }}</li>
+          <li class="list-group-item"><b>ÉTNICO:</b> {{ paciente.ETNICO }}</li>
+          <li class="list-group-item"><b>NOMBRE DEL PAÍS:</b> {{ paciente.PAIS }}</li>
+          <li class="list-group-item"><b>CURSO DE VIDA:</b> {{ paciente.NOMBRE }}</li>
+          <li class="list-group-item"><b>NOMBRE DEL SERVICIO:</b> {{ paciente.CUPS }}</li>
+          <li class="list-group-item"><b>FECHA DE CITA:</b> {{ paciente.ATENCION_FACTURA }}</li>
+          <li class="list-group-item"><b>CÓDIGO DEL DIAGNÓSTICO:</b> {{ paciente.CODIGO }}</li>
+          <li class="list-group-item"><b>ATENCIÓN:</b> {{ paciente.ATENDIDO }}</li>
+          <li class="list-group-item"><b>EDAD DEL PACIENTE:</b> {{ paciente.EDAD }} AÑOS</li>
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>
+</div>
+<!--fin detalles del paciente-->

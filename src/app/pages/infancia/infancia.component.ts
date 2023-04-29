@@ -17,7 +17,10 @@ export class InfanciaComponent implements OnInit {
   public islast = false;
   public atendidos = 0;
   public noAtendidos = 0;
-  private toggleButton: any;
+  public toggleButton: any;
+  public paciente = {};
+  public spinner = false;
+  public arrayId = [];
 
   public isCollapsed = true;
 
@@ -40,11 +43,30 @@ export class InfanciaComponent implements OnInit {
     this.infancia = res.data;
     this.atendidos = res.atendidos
     this.noAtendidos = res.noAtendidos
+    this.spinner = true
+    this.arrayId = [];
     console.log( res );
 
     }
     );
   }
+  public buscarInfancia() {
+    this.infanciaService.buscarInfancia(this.page, this.arrayId).subscribe( ( res: any ) => {
+    this.total = res.total
+    this.itemperpage = res.itemperpage
+    this.totalpage = res.totalpage
+    this.islast = res.islast
+    this.infancia = res.data;
+    this.atendidos = res.atendidos
+    this.noAtendidos = res.noAtendidos
+    this.spinner = true
+    this.arrayId = [];
+    //console.log( res );
+
+    }
+    );
+  }
+
 
   public pageSiguiente() {
     this.page = this.page + 1
@@ -54,6 +76,7 @@ export class InfanciaComponent implements OnInit {
     this.totalpage = res.totalpage
     this.islast = res.islast
     this.infancia = res.data;
+    this.arrayId = [];
 
     }
     );
@@ -79,6 +102,12 @@ export class InfanciaComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+  modalOpen( basicmodal:any, paciente ){
+    this.modalService.open( basicmodal, { size: 'lg',  scrollable: true });
+    this.paciente = paciente;
+    console.log(this.paciente);
+
+  }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -88,6 +117,18 @@ export class InfanciaComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  public buscar(event: any) {
+    let identificacion: string = event.target.value
+    if(identificacion.includes(',')){
+      console.log(identificacion.substring(0, identificacion.length-1));
+      this.arrayId.push(identificacion.substring(0, identificacion.length-1));
+      console.log(this.arrayId);
+      event.target.value = ''
+
+    }
+
   }
 
 }

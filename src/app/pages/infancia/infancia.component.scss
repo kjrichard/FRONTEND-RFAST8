@@ -1,9 +1,9 @@
 .table-responsive {
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 700px;
+  max-height: 900px;
   border-spacing: 0;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .table-responsive::-webkit-scrollbar{
@@ -31,6 +31,19 @@ tbody{
 .darkred{
   background-color: darkred;
 }
+.spinner-grow{
+  text-align: center;
+}
+.list-group-item{
+  color: black;
+}
+.modal-content {
+  transform: translate(0, 5%);
+  position: absolute;
+}
+
+
+
 
 
 

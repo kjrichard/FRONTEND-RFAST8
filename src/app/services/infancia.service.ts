@@ -21,6 +21,9 @@ export class InfanciaService {
   getInfancia(page: number = 1) {
     return this.http.get(`${ urlApi }/infancia?page=${page}&limit=100` );
   }
+  buscarInfancia(page: number = 1, arrayId) {
+    return this.http.post(`${ urlApi }/infancia/buscar?page=${page}&limit=200`, arrayId );
+  }
 
 
 }
