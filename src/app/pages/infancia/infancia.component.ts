@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InfanciaService } from 'src/app/services/infancia.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { CursoVidaService } from 'src/app/services/curso-vida.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-infancia',
@@ -9,7 +11,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class InfanciaComponent implements OnInit {
-  public infancia: any = [];
+  public cursoVidaData: any = [];
   public total = 0;
   public page = 1;
   public totalpage = 0;
@@ -21,47 +23,71 @@ export class InfanciaComponent implements OnInit {
   public paciente = {};
   public spinner = false;
   public arrayId = [];
+  public isSearch = false;
+  public codigo: number = 1601;
+  public edadInicial: number = 6;
+  public edadFinal: number = 11;
+
+
 
   public isCollapsed = true;
 
   closeResult: string;
 
-  constructor( private infanciaService: InfanciaService,
+  constructor( private cursoVidaService: CursoVidaService,
     private modalService: NgbModal ) { }
 
   ngOnInit(): void {
-    this.obtenerInfancia();
-    //this.toggleButton = sidebar.getElementsByClassName("sidebar-toggler")[0];
+    this.obtenerCursoVida();
+
   }
 
-  obtenerInfancia() {
-    this.infanciaService.getInfancia().subscribe( ( res: any ) => {
+  obtenerCursoVida() {
+    this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
     this.total = res.total
     this.itemperpage = res.itemperpage
     this.totalpage = res.totalpage
     this.islast = res.islast
-    this.infancia = res.data;
+    this.cursoVidaData = res.data;
     this.atendidos = res.atendidos
     this.noAtendidos = res.noAtendidos
     this.spinner = true
     this.arrayId = [];
-    console.log( res );
+
+
+
 
     }
     );
   }
-  public buscarInfancia() {
-    this.infanciaService.buscarInfancia(this.page, this.arrayId).subscribe( ( res: any ) => {
+  public buscarCursoVida1() {
+    this.cursoVidaService.buscarCursoVida(this.page, this.arrayId, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
     this.total = res.total
     this.itemperpage = res.itemperpage
     this.totalpage = res.totalpage
     this.islast = res.islast
-    this.infancia = res.data;
+    this.cursoVidaData = res.data;
     this.atendidos = res.atendidos
     this.noAtendidos = res.noAtendidos
     this.spinner = true
-    this.arrayId = [];
-    //console.log( res );
+    this.isSearch = true
+
+    }, (error) => {
+      console.log(error);
+
+      if (error.status === 404) {
+        console.log('No pertenece');
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Este Documento: ',
+          text: `${this.arrayId[0]}, No Pertenece a este Curso de Vida`,
+          showConfirmButton: false,
+          timer: 6500
+        })
+
+      }
+      /* console.log(error.status, 'Este es el error'); */
 
     }
     );
@@ -70,29 +96,44 @@ export class InfanciaComponent implements OnInit {
 
   public pageSiguiente() {
     this.page = this.page + 1
-    this.infanciaService.getInfancia(this.page).subscribe( ( res: any ) => {
-    this.total = res.total
-    this.itemperpage = res.itemperpage
-    this.totalpage = res.totalpage
-    this.islast = res.islast
-    this.infancia = res.data;
-    this.arrayId = [];
+    console.log(this.isSearch);
 
+    if(this.isSearch){
+        this.buscarCursoVida1()
+    }else{
+      this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
+        this.total = res.total
+        this.itemperpage = res.itemperpage
+        this.totalpage = res.totalpage
+        this.islast = res.islast
+        this.cursoVidaData = res.data;
+        this.arrayId = [];
+
+
+        }
+        );
     }
-    );
+
+
   }
 
   public pageAtras() {
     this.page = this.page - 1
-    this.infanciaService.getInfancia(this.page).subscribe( ( res: any ) => {
-    this.total = res.total
-    this.itemperpage = res.itemperpage
-    this.totalpage = res.totalpage
-    this.islast = res.islast
-    this.infancia = res.data;
+    if(this.isSearch){
+      this.buscarCursoVida1()
+    }else{
+      this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
+        this.total = res.total
+        this.itemperpage = res.itemperpage
+        this.totalpage = res.totalpage
+        this.islast = res.islast
+        this.cursoVidaData = res.data;
+        this.arrayId = [];
 
+        }
+        );
     }
-    );
+
   }
 
    open(content) {

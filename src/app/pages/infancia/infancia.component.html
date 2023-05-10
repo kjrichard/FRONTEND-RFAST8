@@ -13,7 +13,7 @@
       <div class=" card">
         <div *ngIf="spinner" class="d-grid gap-2 d-md-flex justify-content-md-end">
           <div class=" card-header">
-            <h4 class=" card-title">{{ infancia[0].NOMBRE }} : {{ total  }}</h4>
+            <h4 class=" card-title">{{ cursoVidaData[0].NOMBRE }} : {{ total  }}</h4>
           </div>
           <div class=" card-header">
             <h4 class=" card-title"> ATENDIDOS : {{ atendidos[0].atendidos  }}</h4>
@@ -37,7 +37,6 @@
             <table class="table table-bordered" id="">
               <thead>
                 <tr class="Encabezado">
-                  <th>EDAD</th>
                   <th>NUMERO_DOCUMENTO</th>
                   <th>APELLIDO1</th>
                   <th>APELLIDO2</th>
@@ -51,8 +50,7 @@
                 </tr>
               </thead>
               <tbody class="data">
-                <tr *ngFor ="let table of infancia">
-                  <td>{{ table.EDAD }}</td>
+                <tr *ngFor ="let table of cursoVidaData">
                   <td>{{ table.NUMERO_DOCUMENTO }}</td>
                   <td>{{ table.APELLIDO1 }}</td>
                   <td>{{ table.APELLIDO2 }}</td>
@@ -99,7 +97,7 @@
     <button aria-label="Close"class=" close"data-dismiss="modal"type="button"(click)="modal.dismiss('Cross click')">
       <i class=" tim-icons icon-simple-remove"></i>
     </button>
-    <button aria-label="Close"class=" close"data-dismiss="modal"type="button"(click)="buscarInfancia(); modal.dismiss('Cross click')"
+    <button aria-label="Close"class=" close"data-dismiss="modal"type="button"(click)="buscarCursoVida1(); modal.dismiss('Cross click')"
     type="button" class="btn btn-light">
       buscar
     </button>
@@ -143,10 +141,10 @@
           <li class="list-group-item"><b>ÉTNICO:</b> {{ paciente.ETNICO }}</li>
           <li class="list-group-item"><b>NOMBRE DEL PAÍS:</b> {{ paciente.PAIS }}</li>
           <li class="list-group-item"><b>CURSO DE VIDA:</b> {{ paciente.NOMBRE }}</li>
-          <li class="list-group-item"><b>NOMBRE DEL SERVICIO:</b> {{ paciente.CUPS }}</li>
+<!--           <li class="list-group-item"><b>NOMBRE DEL SERVICIO:</b> {{ paciente.CUPS }}</li>
           <li class="list-group-item"><b>FECHA DE CITA:</b> {{ paciente.ATENCION_FACTURA }}</li>
           <li class="list-group-item"><b>CÓDIGO DEL DIAGNÓSTICO:</b> {{ paciente.CODIGO }}</li>
-          <li class="list-group-item"><b>ATENCIÓN:</b> {{ paciente.ATENDIDO }}</li>
+          <li class="list-group-item"><b>ATENCIÓN:</b> {{ paciente.ATENDIDO }}</li> -->
           <li class="list-group-item"><b>EDAD DEL PACIENTE:</b> {{ paciente.EDAD }} AÑOS</li>
         </ul>
       </div>

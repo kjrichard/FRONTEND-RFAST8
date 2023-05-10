@@ -37,11 +37,10 @@ tbody{
 .list-group-item{
   color: black;
 }
-.modal-content {
-  transform: translate(0, 5%);
-  position: absolute;
-}
 
+.modal.show .modal-dialog {
+  transform: translate(0, 0) !important;
+}
 
 
 
