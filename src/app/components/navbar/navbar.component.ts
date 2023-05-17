@@ -10,6 +10,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  test: Date = new Date();
   private listTitles: any[];
   location: Location;
   mobile_menu_visible: any = 0;

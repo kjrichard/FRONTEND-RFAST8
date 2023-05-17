@@ -41,6 +41,11 @@ tbody{
 .modal.show .modal-dialog {
   transform: translate(0, 0) !important;
 }
+.icon-zoom-split::before{
+  font-size: 20px;
+  color: #ffffff;
+  margin-top: 0 !important;
+}
 
 
 

@@ -78,7 +78,7 @@ export class PrimeraInfanciaComponent implements OnInit {
           position: 'center',
           icon: 'error',
           title: 'Este Documento: ',
-          text: `${this.arrayId[0]}, No Pertenece a este Curso de Vida`,
+          text: `${this.arrayId}, No Pertenece a este Curso de Vida`,
           showConfirmButton: false,
           timer: 6500
         })
