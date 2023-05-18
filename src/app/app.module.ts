@@ -19,6 +19,7 @@ import { AdolecenciaComponent } from './pages/adolecencia/adolecencia.component'
 import { JuventudComponent } from './pages/juventud/juventud.component';
 import { AdultezComponent } from './pages/adultez/adultez.component';
 import { VejezComponent } from './pages/vejez/vejez.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   imports: [

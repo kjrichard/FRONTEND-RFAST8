@@ -73,7 +73,7 @@ export class PrimeraInfanciaComponent implements OnInit {
 
     }, (error) => {
       if (error.status === 404) {
-        console.log('No pertenece');
+        /* console.log('No pertenece'); */
         Swal.fire({
           position: 'center',
           icon: 'error',
