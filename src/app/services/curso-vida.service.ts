@@ -26,7 +26,7 @@ export class CursoVidaService {
   }
 
   login( data: any ) {
-    return this.http.post(`${ urlApi }/curso-vida/login/`, data );
+    return this.http.post(`${ urlApi }/login/`, data );
   }
 
 
