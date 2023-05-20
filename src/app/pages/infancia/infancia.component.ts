@@ -54,9 +54,6 @@ export class InfanciaComponent implements OnInit {
     this.spinner = true
     this.arrayId = [];
 
-
-
-
     }
     );
   }

@@ -1,3 +1,4 @@
+import { DashboardServiciosService } from './../../services/dashboard-servicios.service';
 import { Component, OnInit } from "@angular/core";
 import Chart from 'chart.js';
 
@@ -6,6 +7,11 @@ import Chart from 'chart.js';
   templateUrl: "dashboard.component.html"
 })
 export class DashboardComponent implements OnInit {
+  public servicio1607: any = [];
+  public atendidos = 0;
+  public noAtendidos = 0;
+
+
   public canvas : any;
   public ctx;
   public datasets: any;
@@ -15,9 +21,10 @@ export class DashboardComponent implements OnInit {
   public clicked1: boolean = false;
   public clicked2: boolean = false;
 
-  constructor() {}
+  constructor(private dashboardServiciosService: DashboardServiciosService) {}
 
   ngOnInit() {
+    this.obtenerServicio();
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
       maintainAspectRatio: false,
       legend: {
@@ -466,5 +473,15 @@ export class DashboardComponent implements OnInit {
   public updateOptions() {
     this.myChartData.data.datasets[0].data = this.data;
     this.myChartData.update();
+  }
+
+  obtenerServicio() {
+    this.dashboardServiciosService.obtenerServicio().subscribe( (res: any) => {
+      this.servicio1607 = res.data
+      this.atendidos = res.atendidos
+      this.noAtendidos = res.noAtendidos
+
+    }
+    );
   }
 }
