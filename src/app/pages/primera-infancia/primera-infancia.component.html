@@ -34,6 +34,7 @@
             <table class="table table-bordered" id="">
               <thead>
                 <tr class="Encabezado">
+                  <th>N°</th>
                   <th>NUMERO_DOCUMENTO</th>
                   <th>APELLIDO1</th>
                   <th>APELLIDO2</th>
@@ -47,7 +48,8 @@
                 </tr>
               </thead>
               <tbody class="data">
-                <tr *ngFor ="let table of cursoVidaData">
+                <tr *ngFor ="let table of cursoVidaData; let i = index">
+                  <td>{{ i + 1 }}</td>
                   <td>{{ table.NUMERO_DOCUMENTO }}</td>
                   <td>{{ table.APELLIDO1 }}</td>
                   <td>{{ table.APELLIDO2 }}</td>

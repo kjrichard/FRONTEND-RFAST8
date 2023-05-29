@@ -1,1 +1,98 @@
 /* You can add global styles to this file, and also import other style files */
+.table-responsive {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 900px;
+  border-spacing: 0;
+  margin-top: 2rem;
+}
+
+.table-responsive::-webkit-scrollbar{
+  display: none;
+}
+.Encabezado{
+  text-align: center;
+}
+tbody{
+  tr{
+    td{
+      padding: 10px;
+      text-align: center;
+    }
+  }
+}
+
+.darkgreen{
+  background-color: darkgreen;
+ //
+
+  color-interpolation-filters: 10px;
+  //align-items: center;
+}
+.darkred{
+  background-color: darkred;
+}
+.spinner-grow{
+  text-align: center;
+}
+.list-group-item{
+  color: black;
+}
+
+.modal.show .modal-dialog {
+  transform: translate(0, 8%) !important;
+}
+.icon-zoom-split::before{
+  font-size: 20px;
+  color: #ffffff;
+  margin-top: 0 !important;
+}
+
+/* Dashboard */
+
+.order-card {
+  color: #fff;
+}
+
+.bg-c-blue {
+  background: linear-gradient(45deg,#4099ff,#73b4ff);
+}
+
+/* .bg-c-green {
+  background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+} */
+
+.bg-c-yellow {
+  background: linear-gradient(45deg,#FFB64D,#ffcb80);
+}
+
+.bg-c-pink {
+  background: linear-gradient(45deg,#FF5370,#ff869a);
+}
+
+
+.card {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+  box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+  border: none;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.card .card-block {
+  padding: 25px;
+}
+
+.order-card i {
+  font-size: 26px;
+}
+
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}

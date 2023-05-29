@@ -11,6 +11,26 @@ import Swal from 'sweetalert2';
   styleUrls: ['./primera-infancia.component.scss']
 })
 export class PrimeraInfanciaComponent implements OnInit {
+
+  documentos: any = [
+    {codigo: '1', nombre: 'CEDULA DE CIUDADANIA', abreviatira: 'CC'},
+    {codigo: '2', nombre: 'TARJETA DE IDENTIDAD', abreviatira: 'TI'},
+    {codigo: '3', nombre: 'CEDULA DE EXTRANJERIA', abreviatira: 'CE'},
+    {codigo: '4', nombre: 'REGISTRO CIVIL', abreviatira: 'RC'},
+    {codigo: '5', nombre: 'PASAPORTE', abreviatira: 'PA'},
+    {codigo: '6', nombre: 'ADULTO SIN IDENTIFICACION', abreviatira: 'AS'},
+    {codigo: '7', nombre: 'MENOR SIN IDENTIFICACION', abreviatira: 'MS'},
+    /* {codigo: '8', nombre: 'CEDULA DE CIUDADANIA', abreviatira: 'NC'}, */
+    {codigo: '9', nombre: 'NACIDO VIVO', abreviatira: 'NC'},
+    {codigo: '10', nombre: 'SALVO CONDUCTO', abreviatira: 'SC'},
+    /* {codigo: '11', nombre: 'CEDULA DE CIUDADANIA', abreviatira: 'CD'}, */
+    {codigo: '12', nombre: 'CARNE DIPLOMATICO', abreviatira: 'CD'},
+    {codigo: '13', nombre: 'PERMISO ESPECIAL', abreviatira: 'PE'},
+    {codigo: '14', nombre: 'RECIDENTE ESPECIAL', abreviatira: 'RE'},
+    /* {codigo: '14', nombre: 'CEDULA DE CIUDADANIA', abreviatira: 'DE'}, */
+    {codigo: '15', nombre: 'PERMISO PROTECCION TEMPORAL', abreviatira: 'PT'}
+  ]
+
   public cursoVidaData: any = [];
   public total = 0;
   public page = 1;
