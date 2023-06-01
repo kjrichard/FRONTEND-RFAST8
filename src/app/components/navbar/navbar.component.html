@@ -78,8 +78,7 @@
           </ul>
         </li> -->
         <li class=" nav-item" ngbDropdown>
-          <a
-            class=" nav-link"
+          <a class=" nav-link"
             data-toggle="dropdown"
             href="javascript:void(0)"
             ngbDropdownToggle
@@ -93,18 +92,19 @@
           <ul class=" dropdown-navbar" ngbDropdownMenu>
             <li class=" nav-link">
               <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Profile
+                <button class="btn btn-light">Perfil</button>
               </a>
             </li>
             <li class=" nav-link">
               <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Settings
+                <button class="btn btn-light">Ajustes</button>
               </a>
             </li>
-            <li class=" dropdown-divider"></li>
+            <!-- <li class=" dropdown-divider"></li> -->
             <li class=" nav-link">
               <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Log out
+                <button class="btn btn-light" (click)="cerrarSesion()">Cerrar</button>
+
               </a>
             </li>
           </ul>

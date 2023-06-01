@@ -21,15 +21,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginFormulario = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')]],
       password: ['', [Validators.required]]
     });
-  }
 
+  }
+  validarCampo(campo: string): boolean {
+    if (this.loginFormulario.get(campo).invalid) {
+      return true;
+    }else{
+      return false;
+    }
+  }
   login(){
-    console.log( this.loginFormulario.value);
     this.cursoVidaService.login( this.loginFormulario.value ).subscribe( ( res: any ) => {
-      console.log( res );
+      localStorage.setItem('token', res.token);
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -50,7 +56,6 @@ export class LoginComponent implements OnInit {
         timer: 3500
       })
     })
-
 
   }
 

@@ -13,21 +13,22 @@ import { AdolecenciaComponent } from "src/app/pages/adolecencia/adolecencia.comp
 import { JuventudComponent } from "src/app/pages/juventud/juventud.component";
 import { AdultezComponent } from "src/app/pages/adultez/adultez.component";
 import { VejezComponent } from "src/app/pages/vejez/vejez.component";
+import { LoginGuard } from "src/app/guard/login.guard";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
-  { path: "dashboard", component: DashboardComponent },
+  { path: "dashboard", component: DashboardComponent, canActivate: [LoginGuard] },
   /*{ path: "icons", component: IconsComponent },
   { path: "maps", component: MapComponent },
   { path: "notifications", component: NotificationsComponent },
   { path: "user", component: UserComponent },
   { path: "tables", component: TablesComponent },
   { path: "typography", component: TypographyComponent },*/
-  { path: "primera-infancia", component: PrimeraInfanciaComponent },
-  { path: "infancia", component: InfanciaComponent },
-  { path: "adolecencia", component: AdolecenciaComponent },
-  { path: "juventud", component: JuventudComponent },
-  { path: "adultez", component: AdultezComponent },
-  { path: "vejez", component: VejezComponent },
+  { path: "primera-infancia", component: PrimeraInfanciaComponent, canActivate: [LoginGuard] },
+  { path: "infancia", component: InfanciaComponent, canActivate: [LoginGuard] },
+  { path: "adolecencia", component: AdolecenciaComponent, canActivate: [LoginGuard] },
+  { path: "juventud", component: JuventudComponent, canActivate: [LoginGuard] },
+  { path: "adultez", component: AdultezComponent, canActivate: [LoginGuard] },
+  { path: "vejez", component: VejezComponent, canActivate: [LoginGuard] },
   // { path: "rtl", component: RtlComponent }
 ];
