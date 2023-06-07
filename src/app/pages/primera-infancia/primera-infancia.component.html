@@ -10,7 +10,9 @@
     <div class=" col-md-12">
       <div class=" card">
         <div class=" card-header">
-          <button class="btn btn-danger btn-sm" >DESCARGAR EXCEL</button>
+         <!--  <button (click)="exportarExcel()" class="btn btn-danger btn-sm" >DESCARGAR EXCEL</button> -->
+        <!--  <button class="btn btn-danger btn-sm"> DESCARGAR EXCEL</button> -->
+        <a href={{excel}} descarga="archivo.xlsx" class="btn btn-danger btn-sm">DESCARGAR EXCEL</a>
         </div>
         <div *ngIf="spinner" class="d-grid gap-2 d-md-flex justify-content-md-end">
           <div class=" card-header">

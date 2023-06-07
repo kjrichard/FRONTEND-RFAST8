@@ -27,6 +27,10 @@ export class CursoVidaService {
     return this.http.post(`${ urlApi }/curso-vida/buscar/${CODIGO}/${edadInicial}/${edadFinal}?page=${page}&limit=100`, arrayId );
   }
 
+  exportarExcel(CODIGO: number, edadInicial: number, edadFinal: number) {
+    return this.http.get(`${ urlApi }/exportar-excel/${CODIGO}/${edadInicial}/${edadFinal}`);
+  }
+
   login( data: any ) {
     return this.http.post(`${ urlApi }/login/`, data );
   }

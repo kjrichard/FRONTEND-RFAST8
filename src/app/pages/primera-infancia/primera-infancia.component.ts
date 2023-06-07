@@ -1,8 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { InfanciaService } from 'src/app/services/infancia.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CursoVidaService } from 'src/app/services/curso-vida.service';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -11,26 +13,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./primera-infancia.component.scss']
 })
 export class PrimeraInfanciaComponent implements OnInit {
-
-  documentos: any = [
-    {codigo: '1', nombre: 'CEDULA DE CIUDADANIA', abreviatira: 'CC'},
-    {codigo: '2', nombre: 'TARJETA DE IDENTIDAD', abreviatira: 'TI'},
-    {codigo: '3', nombre: 'CEDULA DE EXTRANJERIA', abreviatira: 'CE'},
-    {codigo: '4', nombre: 'REGISTRO CIVIL', abreviatira: 'RC'},
-    {codigo: '5', nombre: 'PASAPORTE', abreviatira: 'PA'},
-    {codigo: '6', nombre: 'ADULTO SIN IDENTIFICACION', abreviatira: 'AS'},
-    {codigo: '7', nombre: 'MENOR SIN IDENTIFICACION', abreviatira: 'MS'},
-    /* {codigo: '8', nombre: 'CEDULA DE CIUDADANIA', abreviatira: 'NC'}, */
-    {codigo: '9', nombre: 'NACIDO VIVO', abreviatira: 'NC'},
-    {codigo: '10', nombre: 'SALVO CONDUCTO', abreviatira: 'SC'},
-    /* {codigo: '11', nombre: 'CEDULA DE CIUDADANIA', abreviatira: 'CD'}, */
-    {codigo: '12', nombre: 'CARNE DIPLOMATICO', abreviatira: 'CD'},
-    {codigo: '13', nombre: 'PERMISO ESPECIAL', abreviatira: 'PE'},
-    {codigo: '14', nombre: 'RECIDENTE ESPECIAL', abreviatira: 'RE'},
-    /* {codigo: '14', nombre: 'CEDULA DE CIUDADANIA', abreviatira: 'DE'}, */
-    {codigo: '15', nombre: 'PERMISO PROTECCION TEMPORAL', abreviatira: 'PT'}
-  ]
-
   public cursoVidaData: any = [];
   public total = 0;
   public page = 1;
@@ -47,6 +29,11 @@ export class PrimeraInfanciaComponent implements OnInit {
   public codigo: number = 1600;
   public edadInicial: number = 0;
   public edadFinal: number = 5;
+  public excelData = [];
+  public data = [];
+  public excel = "";
+  public baseUrl: string = "http://127.0.0.1:3000/exportar-excel/";
+
 
 
 
@@ -56,7 +43,9 @@ export class PrimeraInfanciaComponent implements OnInit {
   closeResult: string;
 
   constructor( private cursoVidaService: CursoVidaService,
-    private modalService: NgbModal ) { }
+    private modalService: NgbModal, private http: HttpClient ) {
+      this.excel = `${this.baseUrl}${this.codigo}/${this.edadInicial}/${this.edadFinal}`
+    }
 
   ngOnInit(): void {
     this.obtenerCursoVida();
@@ -188,4 +177,14 @@ export class PrimeraInfanciaComponent implements OnInit {
 
   }
 
+   /*   Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Descargando.... : ',
+        text: `descarga exitosa`,
+        showConfirmButton: false,
+        timer: 1500
+      }) */
 }
+
+
