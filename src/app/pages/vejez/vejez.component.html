@@ -1,14 +1,33 @@
 <!--<p>primera-infancia works!</p>-->
 
-<div class="spinner-grow" role="status" *ngIf="!spinner">
+<!-- <div class="spinner-grow" role="status" *ngIf="!spinner">
   <span class="visually-hidden">LOADING...</span>
 </div>
-
+ -->
 
 <div class=" content">
   <div class=" row">
     <div class=" col-md-12">
       <div class=" card">
+        <div class=" card-header">
+          <a href={{excel}} descarga="archivo.xlsx" class="btn btn-danger btn-sm" *ngIf="spinner">DESCARGAR EXCEL</a>
+          </div>
+
+        <div class="sk-circle" *ngIf="!spinner">
+          <div class="sk-circle1 sk-child"></div>
+          <div class="sk-circle2 sk-child"></div>
+          <div class="sk-circle3 sk-child"></div>
+          <div class="sk-circle4 sk-child"></div>
+          <div class="sk-circle5 sk-child"></div>
+          <div class="sk-circle6 sk-child"></div>
+          <div class="sk-circle7 sk-child"></div>
+          <div class="sk-circle8 sk-child"></div>
+          <div class="sk-circle9 sk-child"></div>
+          <div class="sk-circle10 sk-child"></div>
+          <div class="sk-circle11 sk-child"></div>
+          <div class="sk-circle12 sk-child"></div>
+        </div>
+
         <div *ngIf="spinner" class="d-grid gap-2 d-md-flex justify-content-md-end">
           <div class=" card-header">
             <h4 class=" card-title">{{ cursoVidaData[0].NOMBRE }} : {{ total  }}</h4>
@@ -33,7 +52,7 @@
           <div class="table-responsive">
             <table class="table table-bordered" id="">
               <thead>
-                <tr class="Encabezado">
+                <tr class="Encabezado" *ngIf="spinner">
                   <th>NUMERO_DOCUMENTO</th>
                   <th>APELLIDO1</th>
                   <th>APELLIDO2</th>
@@ -66,7 +85,7 @@
             </table>
           </div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer" *ngIf="spinner">
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <div class="mr-lg-2">
               <p>total: {{ total }}</p>

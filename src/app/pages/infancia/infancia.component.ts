@@ -27,6 +27,9 @@ export class InfanciaComponent implements OnInit {
   public codigo: number = 1601;
   public edadInicial: number = 6;
   public edadFinal: number = 11;
+  public excel = "";
+  public baseUrl: string = "http://127.0.0.1:3000/exportar-excel/";
+
 
 
 
@@ -35,7 +38,9 @@ export class InfanciaComponent implements OnInit {
   closeResult: string;
 
   constructor( private cursoVidaService: CursoVidaService,
-    private modalService: NgbModal ) { }
+    private modalService: NgbModal ) {
+      this.excel = `${this.baseUrl}${this.codigo}/${this.edadInicial}/${this.edadFinal}`
+    }
 
   ngOnInit(): void {
     this.obtenerCursoVida();

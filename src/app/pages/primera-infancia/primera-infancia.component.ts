@@ -49,13 +49,11 @@ export class PrimeraInfanciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerCursoVida();
-
+    /* this.spinner1(); */
   }
 
   obtenerCursoVida() {
     this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
-
-
     this.total = res.total
     this.itemperpage = res.itemperpage
     this.totalpage = res.totalpage

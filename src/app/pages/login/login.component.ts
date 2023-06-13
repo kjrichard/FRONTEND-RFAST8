@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'error',
-        title: 'VERIFIQUE: ',
+        title: 'VERIFIQUE CONEXION: ',
         text: error.error.message,
         showConfirmButton: false,
         timer: 3500

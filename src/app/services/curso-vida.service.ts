@@ -19,6 +19,8 @@ export class CursoVidaService {
     private router: Router,
   )   { }
 
+
+
   obtenerCursoVida(page: number = 1, CODIGO: number, edadInicial: number, edadFinal: number) {
     return this.http.get(`${ urlApi }/curso-vida/${CODIGO}/${edadInicial}/${edadFinal}?page=${page}&limit=100` );
   }
@@ -48,6 +50,5 @@ export class CursoVidaService {
       catchError(error => of(false))
     )
   }
-
 
 }
