@@ -49,7 +49,7 @@ export class PrimeraInfanciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerCursoVida();
-    /* this.spinner1(); */
+    this.spinner;
   }
 
   obtenerCursoVida() {

@@ -9,8 +9,8 @@
   <div class=" row">
     <div class=" col-md-12">
       <div class=" card">
-        <div class=" card-header">
-          <a href={{excel}} descarga="archivo.xlsx" class="btn btn-danger btn-sm" *ngIf="spinner">DESCARGAR EXCEL</a>
+        <div class=" card-header" *ngIf="spinner">
+          <a href={{excel}} descarga="archivo.xlsx" class="btn btn-danger btn-sm">DESCARGAR EXCEL</a>
           </div>
 
         <div class="sk-circle" *ngIf="!spinner">
@@ -29,7 +29,7 @@
         </div>
 
         <div *ngIf="spinner" class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <div class=" card-header">
+<!--           <div class=" card-header">
             <h4 class=" card-title">{{ cursoVidaData[0].NOMBRE }} : {{ total  }}</h4>
           </div>
           <div class=" card-header">
@@ -37,8 +37,7 @@
           </div>
           <div class=" card-header">
             <h4 class=" card-title"> SIN ATENCIÓN : {{ noAtendidos[0].noAtendidos  }}</h4>
-          </div>
-
+          </div> -->
           <button
           class=" btn btn-link"data-target="#searchModal"data-toggle="modal"
           (click)="open(content)"
@@ -46,36 +45,35 @@
           <i class=" tim-icons icon-zoom-split"> </i>
           <span class=" d-lg-none d-md-block"> Search </span>
         </button>
-
         </div>
         <div class=" card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="">
               <thead>
                 <tr class="Encabezado" *ngIf="spinner">
+                  <th>N°</th>
+                  <th>TIPO_DOCUMENTO</th>
                   <th>NUMERO_DOCUMENTO</th>
-                  <th>APELLIDO1</th>
-                  <th>APELLIDO2</th>
-                  <th>NOMBRE1</th>
-                  <th>NOMBRE2</th>
-                  <th>TELEFONO</th>
-                  <th>CODIGO</th>
+                  <th>APELLIDOS</th>
+                  <th>NOMBRES</th>
+                  <th>FECHA_ATENCION</th>
+                 <!--  <th>CODIGO</th> -->
                   <th>ATENDIDO</th>
                   <th>CUPS</th>
                   <th>VER</th>
                 </tr>
               </thead>
               <tbody class="data">
-                <tr *ngFor ="let table of cursoVidaData">
+                <tr *ngFor ="let table of cursoVidaData; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ table.TIPO_DOCUMENTO }}</td>
                   <td>{{ table.NUMERO_DOCUMENTO }}</td>
-                  <td>{{ table.APELLIDO1 }}</td>
-                  <td>{{ table.APELLIDO2 }}</td>
-                  <td>{{ table.NOMBRE1 }}</td>
-                  <td>{{ table.NOMBRE2 }}</td>
-                  <td>{{ table.TELEFONO_RECIDENCIA }}</td>
-                  <td>{{ table.CODIGO }}</td>
-                  <td [ngClass]="table.ATENDIDO == true ? 'darkgreen' : 'darkred'">{{ table.ATENDIDO }}</td>
-                  <td [ngClass]="table.ATENDIDO == true ? 'darkgreen' : 'darkred'">{{ table.CUPS }}</td>
+                  <td>{{ table.APELLIDOS }}</td>
+                  <td>{{ table.NOMBRES }}</td>
+                  <td>{{ table.ATENCION_FACTURA }}</td>
+                  <!-- <td>{{ table.CODIGO }}</td> -->
+                  <td [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'">{{ table.ATENDIDO }}</td>
+                  <td [ngClass]="table.ATENDIDO == 'SI'? 'darkgreen' : 'darkred'">{{ table.CUPS }}</td>
                   <td>
                     <button (click)="modalOpen(pacientesModal, table)" class=" tim-icons icon-bullet-list-67 btn btn-danger btn-sm">
                     </button>
@@ -135,33 +133,23 @@
     <div class="modal-body">
       <div class=" card-body">
         <ul class="list-group">
-          <!-- <li class="list-group-item"><b>CÓDIGO IPS:</b> {{ paciente.IPS }}</li> -->
           <li class="list-group-item"><b>NOMBRE IPS:</b> {{ paciente.NOMBRE_IPS }}</li>
           <li class="list-group-item"><b>TIPO DE DOCUMENTO:</b> {{ paciente.TIPO_DOCUMENTO }}</li>
           <li class="list-group-item"><b>NÚMERO DOCUMENTO:</b> {{ paciente.NUMERO_DOCUMENTO }}</li>
-          <li class="list-group-item"><b>POBLACIÓN ESPECIAL:</b> {{ paciente.POBLACION_ESPECIAL }}</li>
-          <li class="list-group-item"><b>APELLIDO1:</b> {{ paciente.APELLIDO1 }}</li>
-          <li class="list-group-item"><b>APELLIDO2:</b> {{ paciente.APELLIDO2 }}</li>
-          <li class="list-group-item"><b>NOMBRE1:</b> {{ paciente.NOMBRE1 }}</li>
-          <li class="list-group-item"><b>NOMBRE2:</b> {{ paciente.NOMBRER2 }}</li>
+          <li class="list-group-item"><b>APELLIDOS:</b> {{ paciente.APELLIDOS }}</li>
+          <li class="list-group-item"><b>NOMBRES:</b> {{ paciente.NOMBRES }}</li>
           <li class="list-group-item"><b>FECHA NACIMIENTO:</b> {{ paciente.FECHA_NACIMIENTO }}</li>
           <li class="list-group-item"><b>GENERO:</b> {{ paciente.SEXO }}</li>
           <li class="list-group-item"><b>EMBARAZO:</b> {{ paciente.EMBARAZO }}</li>
-          <li class="list-group-item"><b>TIPO DE DISCAPACIDAD</b>: {{ paciente.TIPO_DISCAPACIDAD }}</li>
-          <li class="list-group-item"><b>GRADO DE DISCAPACIDAD:</b> {{ paciente.GRADO_DISCAPACIDAD }}</li>
           <li class="list-group-item"><b>DIRECCIÓN DE RESIDENCIA:</b> {{ paciente.DIRECCION_RECIDENCIA }}</li>
           <li class="list-group-item"><b>TELÉFONO MÓVIL:</b> {{ paciente.TELEFONO_RECIDENCIA }}</li>
-          <!-- <li class="list-group-item"><b>CÓDIGO DEL BARRIO:</b> {{ paciente.CODIGO_BARRIO }}</li> -->
           <li class="list-group-item"><b>COMUNA:</b> {{ paciente.COMUNA }}</li>
           <li class="list-group-item"><b>NOMBRE DEL BARRIO:</b> {{ paciente.BARRIO }}</li>
           <li class="list-group-item"><b>ÉTNICO:</b> {{ paciente.ETNICO }}</li>
           <li class="list-group-item"><b>NOMBRE DEL PAÍS:</b> {{ paciente.PAIS }}</li>
-          <li class="list-group-item"><b>CURSO DE VIDA:</b> {{ paciente.NOMBRE }}</li>
-<!--           <li class="list-group-item"><b>NOMBRE DEL SERVICIO:</b> {{ paciente.CUPS }}</li>
+          <li class="list-group-item"><b>NOMBRE DEL SERVICIO:</b> {{ paciente.CUPS }}</li>
           <li class="list-group-item"><b>FECHA DE CITA:</b> {{ paciente.ATENCION_FACTURA }}</li>
-          <li class="list-group-item"><b>CÓDIGO DEL DIAGNÓSTICO:</b> {{ paciente.CODIGO }}</li>
-          <li class="list-group-item"><b>ATENCIÓN:</b> {{ paciente.ATENDIDO }}</li> -->
-          <li class="list-group-item"><b>EDAD DEL PACIENTE:</b> {{ paciente.EDAD }} AÑOS</li>
+          <li class="list-group-item"><b>EDAD DEL PACIENTE:</b> {{ paciente.EDAD }} {{ paciente.FORMEDAD }} </li>
         </ul>
       </div>
     </div>

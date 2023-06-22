@@ -66,7 +66,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/adolecencia",
-    title: "Adolecencia",
+    title: "Adolescencia",
     rtlTitle: "قائمة الجدول",
     icon: "icon-user-run",
     class: ""

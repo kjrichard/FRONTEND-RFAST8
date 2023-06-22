@@ -5,6 +5,7 @@
   max-height: 900px;
   border-spacing: 0;
   margin-top: 2rem;
+  font-size: 0.8rem;
 }
 
 .table-responsive::-webkit-scrollbar{
@@ -12,6 +13,7 @@
 }
 .Encabezado{
   text-align: center;
+  font-size: 0.8rem;
 }
 tbody{
   tr{
@@ -37,21 +39,30 @@ tbody{
 .spinner-grow{
   text-align: center;
 }
-.list-group-item{
-  color: black;
-}
+/* tabla modal */
+.list-group {
+  line-height: 0;
+  font-size: 12px;
 
+  .list-group-item{
+    color: black;
+    border: 0.0625rem solid #cfd6f8;
+  }
+}
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 5px 24px -1px 24px;
+}
 .modal.show .modal-dialog {
-  transform: translate(0, 8%) !important;
+  transform: translate(0, 2%) !important;
 }
 .icon-zoom-split::before{
   font-size: 20px;
   color: #ffffff;
   margin-top: 0 !important;
 }
-
 /* Dashboard */
-
 .order-card {
   color: #fff;
 }
