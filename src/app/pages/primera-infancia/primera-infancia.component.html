@@ -76,7 +76,7 @@
                   <td>{{ table.ATENCION_FACTURA }}</td>
                   <!-- <td>{{ table.CODIGO }}</td> -->
                   <td [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'">{{ table.ATENDIDO }}</td>
-                  <td [ngClass]="table.ATENDIDO == 'SI'? 'darkgreen' : 'darkred'">{{ table.CUPS }}</td>
+                  <td [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'">{{ table.DescripcionServicio }}</td>
                   <td>
                     <button (click)="modalOpen(pacientesModal, table)" class=" tim-icons icon-bullet-list-67 btn btn-danger btn-sm">
                     </button>
@@ -142,7 +142,7 @@
           <li class="list-group-item"><b>APELLIDOS:</b> {{ paciente.APELLIDOS }}</li>
           <li class="list-group-item"><b>NOMBRES:</b> {{ paciente.NOMBRES }}</li>
           <li class="list-group-item"><b>FECHA NACIMIENTO:</b> {{ paciente.FECHA_NACIMIENTO }}</li>
-          <li class="list-group-item"><b>GENERO:</b> {{ paciente.SEXO }}</li>
+          <li class="list-group-item"><b>GENERO:</b> {{ paciente.GENERO }}</li>
           <li class="list-group-item"><b>EMBARAZO:</b> {{ paciente.EMBARAZO }}</li>
           <li class="list-group-item"><b>DIRECCIÓN DE RESIDENCIA:</b> {{ paciente.DIRECCION_RECIDENCIA }}</li>
           <li class="list-group-item"><b>TELÉFONO MÓVIL:</b> {{ paciente.TELEFONO_RECIDENCIA }}</li>
@@ -151,7 +151,7 @@
           <li class="list-group-item"><b>ÉTNICO:</b> {{ paciente.ETNICO }}</li>
           <li class="list-group-item"><b>NOMBRE DEL PAÍS:</b> {{ paciente.PAIS }}</li>
           <li class="list-group-item"><b>CODIGO RESPONSABLE DEL SERVICIO:</b> {{ paciente.CODIGO }}</li>
-          <li class="list-group-item"><b>NOMBRE DEL SERVICIO:</b> {{ paciente.CUPS }}</li>
+          <li class="list-group-item"><b>NOMBRE DEL SERVICIO:</b> {{ paciente.CodigoServicio }}</li>
           <li class="list-group-item"><b>FECHA DE CITA:</b> {{ paciente.ATENCION_FACTURA }}</li>
           <li class="list-group-item"><b>EDAD DEL PACIENTE:</b> {{ paciente.EDAD }} {{ paciente.FORMEDAD }} </li>
         </ul>
