@@ -14,6 +14,7 @@ import { JuventudComponent } from "src/app/pages/juventud/juventud.component";
 import { AdultezComponent } from "src/app/pages/adultez/adultez.component";
 import { VejezComponent } from "src/app/pages/vejez/vejez.component";
 import { LoginGuard } from "src/app/guard/login.guard";
+import { UserComponent } from "../../pages/user/user.component";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
@@ -30,5 +31,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "juventud", component: JuventudComponent, canActivate: [LoginGuard] },
   { path: "adultez", component: AdultezComponent, canActivate: [LoginGuard] },
   { path: "vejez", component: VejezComponent, canActivate: [LoginGuard] },
+  { path: "user", component: UserComponent, canActivate: [LoginGuard] }
   // { path: "rtl", component: RtlComponent }
 ];

@@ -34,10 +34,6 @@ export class PrimeraInfanciaComponent implements OnInit {
   public excel = "";
   public baseUrl: string = "http://127.0.0.1:3000/exportar-excel/";
 
-
-
-
-
   public isCollapsed = true;
 
   closeResult: string;
@@ -63,6 +59,7 @@ export class PrimeraInfanciaComponent implements OnInit {
     this.noAtendidos = res.noAtendidos
     this.spinner = true
     this.arrayId = []
+
 
     });
   }

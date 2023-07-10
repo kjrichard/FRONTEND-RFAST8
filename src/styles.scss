@@ -11,9 +11,17 @@
 .table-responsive::-webkit-scrollbar{
   display: none;
 }
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: 1px;
+}
 .Encabezado{
   text-align: center;
   font-size: 0.8rem;
+  color:#ecf0f1;
 }
 tbody{
   tr{
@@ -246,3 +254,49 @@ tbody{
             transform: scale(1);
   }
 }
+/* usuarios */
+/*table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.th, td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.active {
+  color: green;
+}
+
+.inactive {
+  color: red;
+}
+
+.edit-btn, .deactivate-btn, .activate-btn {
+  padding: 4px 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 15%;
+}
+
+.deactivate-btn {
+  background-color: #f44336;
+  color: white;
+  border-radius: 15%;
+}
+
+.activate-btn {
+  background-color: #2196F3;
+  color: white;
+}*/

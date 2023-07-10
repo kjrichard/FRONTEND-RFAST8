@@ -6,6 +6,7 @@ declare interface RouteInfo {
   rtlTitle: string;
   icon: string;
   class: string;
+  perfil: any;
 }
 export const ROUTES: RouteInfo[] = [
   {
@@ -13,99 +14,67 @@ export const ROUTES: RouteInfo[] = [
     title: "Dashboard",
     rtlTitle: "لوحة القيادة",
     icon: "icon-chart-pie-36",
-    class: ""
-  },
-  /*{
-    path: "/icons",
-    title: "Icons",
-    rtlTitle: "الرموز",
-    icon: "icon-atom",
-    class: ""
-  },
-  {
-    path: "/maps",
-    title: "Maps",
-    rtlTitle: "خرائط",
-    icon: "icon-pin",
-    class: "" },
-  {
-    path: "/notifications",
-    title: "Notifications",
-    rtlTitle: "إخطارات",
-    icon: "icon-bell-55",
-    class: ""
+    class: "",
+    perfil: [1, 2]
   },
 
-  {
-    path: "/user",
-    title: "User Profile",
-    rtlTitle: "ملف تعريفي للمستخدم",
-    icon: "icon-single-02",
-    class: ""
-  },
-  {
-    path: "/tables",
-    title: "Table List",
-    rtlTitle: "قائمة الجدول",
-    icon: "icon-puzzle-10",
-    class: ""
-  }, */
   {
     path: "/primera-infancia",
     title: "primera Infancia",
     rtlTitle: "قائمة الجدول",
     icon: "icon-bold",
-    class: ""
+    class: "",
+    perfil: [1]
   },
   {
     path: "/infancia",
     title: "Infancia",
     rtlTitle: "قائمة الجدول",
     icon: "icon-controller",
-    class: ""
+    class: "",
+    perfil: [1]
   },
   {
     path: "/adolecencia",
     title: "Adolescencia",
     rtlTitle: "قائمة الجدول",
     icon: "icon-user-run",
-    class: ""
+    class: "",
+    perfil: [1]
   },
   {
     path: "/juventud",
     title: "Juventud",
     rtlTitle: "قائمة الجدول",
     icon: "icon-trophy",
-    class: ""
+    class: "",
+    perfil: [1]
   },
   {
     path: "/adultez",
     title: "Adultez",
     rtlTitle: "قائمة الجدول",
     icon: "icon-single-02",
-    class: ""
+    class: "",
+    perfil: [1]
   },
   {
     path: "/vejez",
     title: "Vejez",
     rtlTitle: "قائمة الجدول",
     icon: "icon-sound-wave",
-    class: ""
-  },
-  /*{
-    path: "/typography",
-    title: "Typography",
-    rtlTitle: "طباعة",
-    icon: "icon-align-center",
-    class: ""
+    class: "",
+    perfil: [1, 2]
   },
   {
-    path: "/rtl",
-    title: "RTL Support",
-    rtlTitle: "ار تي ال",
-    icon: "icon-world",
-    class: ""
-  }*/
+    path: "/user",
+    title: "Usuarios",
+    rtlTitle: "ملف تعريفي للمستخدم",
+    icon: "icon-align-center",
+    class: "",
+    perfil: [1, 2]
+  },
+
 ];
 
 @Component({
@@ -115,11 +84,23 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
-
+  public user: any = {perfil_id: 1}
   constructor() {}
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+   /*  this.menuItems = ROUTES.filter(menuItem => menuItem); */
+  this.user = JSON.parse(localStorage.getItem('id_perfil'))
+  console.log(this.user);
+  this.menuItems = ROUTES.filter(menuItem => {
+    for (let i = 0; i < menuItem.perfil.length; i++) {
+      const item = menuItem.perfil[i];
+      if (item === this.user) {
+        return item;
+      }
+
+    }
+  })
+
   }
   isMobileMenu() {
     if (window.innerWidth > 991) {

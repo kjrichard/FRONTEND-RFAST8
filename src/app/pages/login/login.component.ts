@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   login(){
     this.cursoVidaService.login( this.loginFormulario.value ).subscribe( ( res: any ) => {
       localStorage.setItem('token', res.token);
+      localStorage.setItem('id_perfil', JSON.stringify( res.usuarioLogeado.id_perfil));
       Swal.fire({
         position: 'center',
         icon: 'success',
