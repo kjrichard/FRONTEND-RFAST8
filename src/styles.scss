@@ -7,7 +7,6 @@
   margin-top: 2rem;
   font-size: 0.8rem;
 }
-
 .table-responsive::-webkit-scrollbar{
   display: none;
 }
@@ -254,48 +253,48 @@ tbody{
             transform: scale(1);
   }
 }
+// Modal usuarios
+.modal-content .modal-footer {
+  border-top: 0;
+  justify-content: center !important;
+}
+.edit {
+  color: #c5c5c5 !important;
+}
 /* usuarios */
 /*table {
   border-collapse: collapse;
   width: 100%;
 }
-
 .th, td {
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid #ddd;
 }
-
 tr:hover {
   background-color: #f5f5f5;
 }
-
 .active {
   color: green;
 }
-
 .inactive {
   color: red;
 }
-
 .edit-btn, .deactivate-btn, .activate-btn {
   padding: 4px 8px;
   border: none;
   cursor: pointer;
 }
-
 .edit-btn {
   background-color: #4CAF50;
   color: white;
   border-radius: 15%;
 }
-
 .deactivate-btn {
   background-color: #f44336;
   color: white;
   border-radius: 15%;
 }
-
 .activate-btn {
   background-color: #2196F3;
   color: white;

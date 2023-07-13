@@ -25,4 +25,8 @@ export class UsuariosService {
   crearUsuario(usuario: any) {
     return this.http.post(`${ urlApi }/usuario`, usuario);
   }
+  actualizarUsuario(usuario: any, id: number) {
+    return this.http.patch(`${ urlApi }/usuario/`+id, usuario);
+  }
+
 }
