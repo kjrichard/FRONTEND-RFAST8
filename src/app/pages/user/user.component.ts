@@ -75,31 +75,23 @@ export class UserComponent implements OnInit {
       timer: 3500
     })
   })
-}
-obtenerDatos(table: any, basicModal: any) {
+  }
+  obtenerDatos(table: any, basicModal: any) {
   this.modalService.open(basicModal);
- /* console.log(this.usuarioFormulario.controls['nombres'].setValue(table.nombres));
- console.log(table.nombres, this.usuarioFormulario.value); */
- this.usuarioFormularioActualizar.controls['email'].setValue(table.email);
- this.usuarioFormularioActualizar.controls['nombres'].setValue(table.nombres);
- this.usuarioFormularioActualizar.controls['apellidos'].setValue(table.apellidos);
- this.usuarioFormularioActualizar.controls['id_perfil'].setValue(table.id_perfil);
- this.usuarioFormularioActualizar.controls['cedula'].setValue(table.cedula);
- this.usuarioFormularioActualizar.controls['id'].setValue(table.id);
+
+  this.usuarioFormularioActualizar.controls['email'].setValue(table.email);
+  this.usuarioFormularioActualizar.controls['nombres'].setValue(table.nombres);
+  this.usuarioFormularioActualizar.controls['apellidos'].setValue(table.apellidos);
+  this.usuarioFormularioActualizar.controls['id_perfil'].setValue(table.id_perfil);
+  this.usuarioFormularioActualizar.controls['cedula'].setValue(table.cedula);
+  this.usuarioFormularioActualizar.controls['id'].setValue(table.id);
 
 
- this.id_usuario = this.usuarioFormularioActualizar.get('id').value;
+  this.id_usuario = this.usuarioFormularioActualizar.get('id').value;
+  }
 
-
-
-}
-actualizarUsuario() {
-  console.log(this.id_usuario);
-
-
+  actualizarUsuario() {
   this.usuariosService.actualizarUsuario(this.usuarioFormularioActualizar.value, this.id_usuario).subscribe( (res: any) => {
-  console.log(res);
-
   this.obtenerUsuario();
   Swal.fire({
     position: 'center',
@@ -110,7 +102,7 @@ actualizarUsuario() {
     timer: 3500
   })
 
-}, ( error ) => {
+  }, ( error ) => {
   console.log( error );
   Swal.fire({
     position: 'center',
@@ -119,7 +111,37 @@ actualizarUsuario() {
     text: error.error.message,
     showConfirmButton: false,
     timer: 3500
+    })
   })
-})
-}
+  }
+  toggleEstado(usuario: any) {
+    let estado: boolean;
+    if (usuario.estado === null || usuario.estado === false) {
+      estado = true;
+    } else{
+      estado = false;
+    }
+    this.usuariosService.actualizarUsuario({estado}, usuario.id).subscribe((res: any) => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Estado actualizado',
+        text: res.msg,
+        showConfirmButton: false,
+        timer: 3500
+      });
+      this.obtenerUsuario();
+    }, (error) => {
+      console.log(error);
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Error al actualizar el estado',
+        text: error.error.message,
+        showConfirmButton: false,
+        timer: 3500
+      });
+    });
+  }
+
 }

@@ -28,5 +28,11 @@ export class UsuariosService {
   actualizarUsuario(usuario: any, id: number) {
     return this.http.patch(`${ urlApi }/usuario/`+id, usuario);
   }
+  actualizarEstadoUsuario(id: number, estado: boolean) {
+    const url = `${ urlApi }/usuarios/${id}/estado`;
+    const body = { estado };
+
+    return this.http.put(url, body);
+  }
 
 }
