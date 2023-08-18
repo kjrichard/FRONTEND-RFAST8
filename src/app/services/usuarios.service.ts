@@ -22,6 +22,12 @@ export class UsuariosService {
   obtenerPerfil() {
     return this.http.get(`${ urlApi }/perfiles`);
   }
+
+  obtenerPermisos() {
+    return this.http.get(`${ urlApi }/listar-permisos`);
+  }
+
+
   crearUsuario(usuario: any) {
     return this.http.post(`${ urlApi }/usuario`, usuario);
   }

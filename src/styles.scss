@@ -264,41 +264,41 @@ tbody{
 .toggle {
   color: #ff2005 !important;
 }
-/* footer */
-footer {
-  padding: 20px;
-}
 
-h3 {
-  font-size: 16px;
+/* Estilo personalizado para checkboxes */
+.checkbox-personalizado {
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Organiza los grupos en cuatro columnas */
-  gap: 10px; /* Espacio entre los grupos */
+.checkbox-personalizado input[type="checkbox"] {
+  margin-right: 5px;
 }
 
-.grupo {
-  padding: 10px;
-  border: 1px solid #ccc;
+/* Estilo para el marcador del checkbox */
+.checkbox-personalizado .checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
 }
 
-h4 {
-  font-size: 14px;
-  margin-bottom: 5px;
+.checkbox-personalizado input[type="checkbox"]:checked + .checkmark {
+  background-color: #000;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.modal[_ngcontent-xyh-c50] .modal-header[_ngcontent-xyh-c50], .modal[_ngcontent-xyh-c50] .modal-body[_ngcontent-xyh-c50], .modal[_ngcontent-xyh-c50] .modal-footer[_ngcontent-xyh-c50] {
+  padding: 10px 29px;
 }
 
-li {
-  margin-bottom: 5px;
-}
+
+/* footer */
+
+
+
 /* usuarios */
 /*table {
   border-collapse: collapse;

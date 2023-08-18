@@ -12,6 +12,7 @@ const urlApi: any = 'http://localhost:3000';
 export class CursoVidaService {
 
   public customerData: any = null;
+  public USUARIO: any;
 
 
   constructor(
@@ -36,14 +37,18 @@ export class CursoVidaService {
   login( data: any ) {
     return this.http.post(`${ urlApi }/login/`, data );
   }
-  validarToken(): Observable<Boolean> {
+  validarToken(id: number ): Observable<Boolean> {
+    id = +localStorage.getItem('id_usuario') ;
     const token = localStorage.getItem('token') || '';
-    return this.http.get(`${ urlApi }/validar-token`, {
+
+    return this.http.get(`${ urlApi }/validar-token/${id}`, {
       headers: {
         'x-token': token
       }
     }).pipe(
       tap( (res: any) =>{
+
+        this.USUARIO = res.usuarioLogeado;
         localStorage.setItem('token', res.token);
       }),
       map( res => true ),

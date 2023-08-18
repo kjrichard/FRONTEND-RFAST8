@@ -7,13 +7,16 @@ import { CursoVidaService } from '../services/curso-vida.service';
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  constructor(private cursoVidaService: CursoVidaService, private router:Router  ) { }
+  public id: number = +localStorage.getItem('id_usuario') ;
+  constructor(private cursoVidaService: CursoVidaService, private router:Router  ) {
+
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): any {
 
-    return this.cursoVidaService.validarToken()
+    return this.cursoVidaService.validarToken( this.id )
         .pipe(
           tap(autenticado => {
             if (!autenticado) {

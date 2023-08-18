@@ -1,8 +1,9 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsuariosService } from './../../services/usuarios.service';
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -13,22 +14,28 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class UserComponent implements OnInit {
   @ViewChild('addEmployeeModal') modalElement: ElementRef;
   public listaUsuarios: any = [];
+  public listaPermisos: any = [];
   public usuarioFormulario: FormGroup = null;
   public usuarioFormularioActualizar: FormGroup = null;
   public listaPerfiles: any = [];
+  public permisosSeleccionados: number[] = [];
   public id_usuario: number;
+  public permisos = [];
   constructor(private usuariosService: UsuariosService, private fb: FormBuilder, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.obtenerUsuario();
     this.obtenerPerfil();
+
     this.usuarioFormulario = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')]],
       nombres: ['', [Validators.required]],
       apellidos: ['', [Validators.required]],
       id_perfil: ['', [Validators.required]],
+      permisos: [[], [Validators.required]],
       cedula: ['', [Validators.required, Validators.min(7)]]
     });
+
     this.usuarioFormularioActualizar = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')]],
       nombres: ['', [Validators.required]],
@@ -37,6 +44,16 @@ export class UserComponent implements OnInit {
       cedula: ['', [Validators.required, Validators.min(7)]],
       id: ['',]
     });
+
+    this.obtenerPermisos();
+  }
+
+  selectedValues: number[] = [];
+
+  onSelectMultiple(select: HTMLSelectElement) {
+    const selectedOptions = Array.from(select.selectedOptions);
+    this.selectedValues = selectedOptions.map(option => Number(option.value));
+    console.log(this.selectedValues);
   }
 
   obtenerUsuario() {
@@ -51,7 +68,26 @@ export class UserComponent implements OnInit {
     }
     );
   }
+
+  obtenerPermisos() {
+    this.usuariosService.obtenerPermisos().subscribe( (res: any) => {
+      this.listaPermisos = res.data
+    }
+    );
+  }
+
+  opcionControl(id: number) {
+    this.permisos.push(id);
+    this.usuarioFormulario.controls.permisos.setValue(this.permisos);
+  }
+
   crearUsuario() {
+    const formularioValues = this.usuarioFormulario.value;
+
+    // Ahora puedes enviar los valores a tu backend u otra lógica de procesamiento
+    console.log(formularioValues);
+
+
     this.usuariosService.crearUsuario(this.usuarioFormulario.value).subscribe( (res: any) => {
     this.usuarioFormulario.reset();
     this.obtenerUsuario();
@@ -76,6 +112,7 @@ export class UserComponent implements OnInit {
     })
   })
   }
+
   obtenerDatos(table: any, basicModal: any) {
   this.modalService.open(basicModal);
 
@@ -114,6 +151,7 @@ export class UserComponent implements OnInit {
     })
   })
   }
+
   toggleEstado(usuario: any) {
     let estado: boolean;
     if (usuario.estado === null || usuario.estado === false) {
@@ -143,5 +181,7 @@ export class UserComponent implements OnInit {
       });
     });
   }
+
+
 
 }

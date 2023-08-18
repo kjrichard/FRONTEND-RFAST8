@@ -21,8 +21,12 @@ import { AdultezComponent } from './pages/adultez/adultez.component';
 import { VejezComponent } from './pages/vejez/vejez.component';
 import { LoginComponent } from './pages/login/login.component';
 
+import { CommonModule } from "@angular/common";
+
+
 @NgModule({
   imports: [
+    CommonModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
