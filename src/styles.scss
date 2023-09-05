@@ -264,6 +264,18 @@ tbody{
 .toggle {
   color: #ff2005 !important;
 }
+.modal-content {
+  padding: 2px 2px !important;
+  margin-bottom: -0.5rem;
+  font-size: 12px !important;
+  width: 95% !important;
+  line-height: 1.9 !important;
+  label {
+    display: inline-block;
+    margin-bottom: -0.5rem !important;
+}
+
+}
 
 /* Estilo personalizado para checkboxes */
 .checkbox-personalizado {
@@ -293,6 +305,9 @@ tbody{
 .modal[_ngcontent-xyh-c50] .modal-header[_ngcontent-xyh-c50], .modal[_ngcontent-xyh-c50] .modal-body[_ngcontent-xyh-c50], .modal[_ngcontent-xyh-c50] .modal-footer[_ngcontent-xyh-c50] {
   padding: 10px 29px;
 }
+
+
+
 
 
 /* footer */

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 
 
+
 const urlApi: any = 'http://localhost:3000';
 
 @Injectable({
@@ -20,18 +21,26 @@ export class CursoVidaService {
     private router: Router,
   )   { }
 
-
+ get token (): string {
+    return localStorage.getItem('token');
+ }
 
   obtenerCursoVida(page: number = 1, CODIGO: number, edadInicial: number, edadFinal: number) {
-    return this.http.get(`${ urlApi }/curso-vida/${CODIGO}/${edadInicial}/${edadFinal}?page=${page}&limit=100` );
+    return this.http.get(`${ urlApi }/curso-vida/${CODIGO}/${edadInicial}/${edadFinal}?page=${page}&limit=100`, {
+      headers: { 'x-token': this.token }
+    } );
   }
 
   buscarCursoVida(page: number = 1, arrayId: any, CODIGO: number, edadInicial: number, edadFinal: number) {
-    return this.http.post(`${ urlApi }/curso-vida/buscar/${CODIGO}/${edadInicial}/${edadFinal}?page=${page}&limit=100`, arrayId );
+    return this.http.post(`${ urlApi }/curso-vida/buscar/${CODIGO}/${edadInicial}/${edadFinal}?page=${page}&limit=100`, arrayId , {
+      headers: { 'x-token': this.token }
+    } );
   }
 
   exportarExcel(CODIGO: number, edadInicial: number, edadFinal: number) {
-    return this.http.get(`${ urlApi }/exportar-excel/${CODIGO}/${edadInicial}/${edadFinal}`);
+    return this.http.get(`${ urlApi }/exportar-excel/${CODIGO}/${edadInicial}/${edadFinal}`, {
+      headers: { 'x-token': this.token }
+    } );
   }
 
   login( data: any ) {

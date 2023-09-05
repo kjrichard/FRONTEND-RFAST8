@@ -59,6 +59,8 @@ export class PrimeraInfanciaComponent implements OnInit {
     this.noAtendidos = res.noAtendidos
     this.spinner = true
     this.arrayId = []
+    /* console.log(this.cursoVidaData); */
+
 
 
     });
@@ -77,7 +79,6 @@ export class PrimeraInfanciaComponent implements OnInit {
 
     }, (error) => {
       if (error.status === 404) {
-        /* console.log('No pertenece'); */
         Swal.fire({
           position: 'center',
           icon: 'error',

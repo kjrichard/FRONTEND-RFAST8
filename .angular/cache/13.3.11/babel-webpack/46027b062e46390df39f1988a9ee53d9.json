@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { LoginComponent } from 'src/app/pages/login/login.component';\nexport var AuthLayoutRoutes = [{\n  path: 'login',\n  component: LoginComponent\n}];","map":null,"metadata":{},"sourceType":"module"}
