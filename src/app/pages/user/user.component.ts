@@ -3,6 +3,8 @@ import { UsuariosService } from './../../services/usuarios.service';
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+
 
 
 
@@ -21,7 +23,8 @@ export class UserComponent implements OnInit {
   public permisosSeleccionados: number[] = [];
   public id_usuario: number;
   public permisos = [];
-  constructor(private usuariosService: UsuariosService, private fb: FormBuilder, private modalService: NgbModal) {}
+  constructor(private usuariosService: UsuariosService, private fb: FormBuilder, private modalService: NgbModal,
+    private router: Router) {}
 
   ngOnInit() {
     this.obtenerUsuario();
@@ -41,6 +44,7 @@ export class UserComponent implements OnInit {
       nombres: ['', [Validators.required]],
       apellidos: ['', [Validators.required]],
       id_perfil: ['', [Validators.required]],
+      permisos: [[], [Validators.required]],
       cedula: ['', [Validators.required, Validators.min(7)]],
       id: ['',]
     });
@@ -79,6 +83,10 @@ export class UserComponent implements OnInit {
   opcionControl(id: number) {
     this.permisos.push(id);
     this.usuarioFormulario.controls.permisos.setValue(this.permisos);
+  }
+  opcionControlActualizar(id: number) {
+    this.permisos.push(id);
+    this.usuarioFormularioActualizar.controls.permisos.setValue(this.permisos);
   }
 
   crearUsuario() {
@@ -122,6 +130,9 @@ export class UserComponent implements OnInit {
   this.usuarioFormularioActualizar.controls['id_perfil'].setValue(table.id_perfil);
   this.usuarioFormularioActualizar.controls['cedula'].setValue(table.cedula);
   this.usuarioFormularioActualizar.controls['id'].setValue(table.id);
+  this.usuarioFormularioActualizar.controls['permisos'].setValue([]);
+  console.log(this.usuarioFormularioActualizar.value);
+
 
 
   this.id_usuario = this.usuarioFormularioActualizar.get('id').value;
@@ -129,7 +140,12 @@ export class UserComponent implements OnInit {
 
   actualizarUsuario() {
   this.usuariosService.actualizarUsuario(this.usuarioFormularioActualizar.value, this.id_usuario).subscribe( (res: any) => {
+  this.permisos = [];
+  this.usuarioFormularioActualizar.controls['permisos'].setValue([]);
+  this.listaPermisos = [];
   this.obtenerUsuario();
+  this.obtenerPermisos();
+  this.reloadPage();
   Swal.fire({
     position: 'center',
     icon: 'success',
@@ -182,6 +198,14 @@ export class UserComponent implements OnInit {
     });
   }
 
+  reloadPage() {
+    // Obtiene la URL actual
+    const currentUrl = this.router.url;
 
+    // Navega a la misma URL para recargar la página
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
 
 }

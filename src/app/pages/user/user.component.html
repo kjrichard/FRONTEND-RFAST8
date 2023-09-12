@@ -537,20 +537,24 @@
             <div class="form-group">
               <label>Perfil</label>
               <select formControlName="id_perfil" class="form-control">
-                <option *ngFor="let perfil of listaPerfiles" value="{{perfil.id_perfil}}">{{perfil.nombre}}</option>
+                <option
+                  *ngFor="let perfil of listaPerfiles"
+                  value="{{ perfil.id_perfil }}"
+                >
+                  {{ perfil.nombre }}
+                </option>
               </select>
             </div>
             <div class="form-group1">
               <label class="texto-negro">Permisos:</label>
-              <div *ngFor="let opcion of listaPermisos" class="checkbox-personalizado">
-                <input
-                  type="checkbox"
-                  (change)="opcionControl(opcion.id)"
-                />
+              <div
+                *ngFor="let opcion of listaPermisos"
+                class="checkbox-personalizado"
+              >
+                <input type="checkbox" (change)="opcionControl(opcion.id)" />
                 <label class="texto-negro">{{ opcion.title }}</label>
               </div>
             </div>
-
           </div>
           <div class="modal-footer">
             <input
@@ -612,12 +616,25 @@
             <label>Perfil</label>
             <select formControlName="id_perfil" class="form-control">
               <option
-                *ngFor="let opcion of listaPerfiles"
-                [value]="opcion.id_perfil"
+                *ngFor="let perfil of listaPerfiles"
+                value="{{ perfil.id_perfil }}"
               >
-                {{ opcion.nombre }}
+                {{ perfil.nombre }}
               </option>
             </select>
+          </div>
+          <div class="form-group1">
+            <label class="texto-negro">Permisos:</label>
+            <div
+              *ngFor="let opcion of listaPermisos"
+              class="checkbox-personalizado"
+            >
+              <input
+                type="checkbox"
+                (change)="opcionControlActualizar(opcion.id)"
+              />
+              <label class="texto-negro">{{ opcion.title }}</label>
+            </div>
           </div>
         </div>
         <div class="modal-footer">

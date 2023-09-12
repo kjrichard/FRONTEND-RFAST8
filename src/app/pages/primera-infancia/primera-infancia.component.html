@@ -76,7 +76,7 @@
                   <td>{{ table.ATENCION_FACTURA }}</td>
                   <!-- <td>{{ table.CODIGO }}</td> -->
                   <td [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'">{{ table.ATENDIDO }}</td>
-                  <td [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'">{{ table.DescripcionServicio }}</td>
+                  <td [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'">{{ table.CodigoServicio }}</td>
                   <td>
                     <button (click)="modalOpen(pacientesModal, table)" class=" tim-icons icon-bullet-list-67 btn btn-danger btn-sm">
                     </button>
