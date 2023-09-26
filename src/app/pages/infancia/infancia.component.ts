@@ -28,7 +28,7 @@ export class InfanciaComponent implements OnInit {
   public edadInicial: number = 6;
   public edadFinal: number = 11;
   public excel = "";
-  public baseUrl: string = "http://127.0.0.1:3000/exportar-excel/";
+  public baseUrl: string = "http://127.0.0.1:3000/exportar-excel1/";
 
 
 

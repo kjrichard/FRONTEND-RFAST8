@@ -28,7 +28,7 @@ export class AdolecenciaComponent implements OnInit {
   public excelData = [];
   public data = [];
   public excel = "";
-  public baseUrl: string = "http://127.0.0.1:3000/exportar-excel/";
+  public baseUrl: string = "http://127.0.0.1:3000/exportar-excel2/";
 
 
 

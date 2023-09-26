@@ -42,6 +42,16 @@ export class CursoVidaService {
       headers: { 'x-token': this.token }
     } );
   }
+  exportarExcel1(CODIGO: number, edadInicial: number, edadFinal: number) {
+    return this.http.get(`${ urlApi }/exportar-excel1/${CODIGO}/${edadInicial}/${edadFinal}`, {
+      headers: { 'x-token': this.token }
+    } );
+  }
+  exportarExcel2(CODIGO: number, edadInicial: number, edadFinal: number) {
+    return this.http.get(`${ urlApi }/exportar-excel2/${CODIGO}/${edadInicial}/${edadFinal}`, {
+      headers: { 'x-token': this.token }
+    } );
+  }
 
   login( data: any ) {
     return this.http.post(`${ urlApi }/login/`, data );

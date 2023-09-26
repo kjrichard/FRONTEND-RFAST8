@@ -34,6 +34,8 @@ export class PrimeraInfanciaComponent implements OnInit {
   public excel = "";
   public baseUrl: string = "http://127.0.0.1:3000/exportar-excel/";
 
+ // public codigoServiciosDisponibles: string[] = [];
+
   public isCollapsed = true;
 
   closeResult: string;
@@ -45,11 +47,12 @@ export class PrimeraInfanciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerCursoVida();
+    //this.filtrarCodigoServiciosDisponibles();
     this.spinner;
   }
 
   obtenerCursoVida() {
-    this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
+    this.cursoVidaService.obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
     this.total = res.total
     this.itemperpage = res.itemperpage
     this.totalpage = res.totalpage
@@ -59,12 +62,23 @@ export class PrimeraInfanciaComponent implements OnInit {
     this.noAtendidos = res.noAtendidos
     this.spinner = true
     this.arrayId = []
-    /* console.log(this.cursoVidaData); */
-
-
-
+    console.log(this.cursoVidaData);
     });
   }
+
+  /* filtrarCodigoServiciosDisponibles() {
+    for (const data of this.cursoVidaData) {
+      for (const codigoServicio of Object.keys(data)) {
+        if (data[codigoServicio] !== null) {
+          // Si el valor no es null, agrégalo a la lista de códigos disponibles
+          if (!this.codigoServiciosDisponibles.includes(codigoServicio)) {
+            this.codigoServiciosDisponibles.push(codigoServicio);
+          }
+        }
+      }
+    }
+  }
+ */
   public buscarCursoVida1() {
     this.cursoVidaService.buscarCursoVida(this.page, this.arrayId, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
     this.total = res.total
