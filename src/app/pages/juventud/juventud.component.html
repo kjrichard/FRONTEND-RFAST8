@@ -1,17 +1,38 @@
 <!--<p>primera-infancia works!</p>-->
 
-<!-- <div class="spinner-grow" role="status" *ngIf="!spinner">
+<!-- <div class="spinner-grow text-danger mt-3" role="status" *ngIf="!spinner">
   <span class="visually-hidden">LOADING...</span>
 </div> -->
 
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div
+          class="d-grid gap-2 d-md-flex justify-content-md-end"
+          *ngIf="spinner"
+        >
+          <button
+            class="btn btn-link"
+            data-target="#searchModal"
+            data-toggle="modal"
+            (click)="open(content)"
+            id="search-button"
+          >
+            <i class="tim-icons icon-zoom-split"> </i>
+            <span class="d-lg-none d-md-block"> Search </span>
+          </button>
+        </div>
 
-<div class=" content">
-  <div class=" row">
-    <div class=" col-md-12">
-      <div class=" card">
-        <div class=" card-header" *ngIf="spinner">
-          <a href={{excel}} descarga="archivo.xlsx" class="btn btn-danger btn-sm">DESCARGAR EXCEL</a>
-          </div>
+        <div class="card-header" *ngIf="spinner">
+          <a
+            href="{{ excel }}"
+            descarga="archivo.xlsx"
+            class="btn btn-danger btn-sm"
+            >DESCARGAR EXCEL</a
+          >
+          <a (click)="reloadPage()" class="btn btn-danger btn-sm">ATRAS</a>
+        </div>
 
         <div class="sk-circle" *ngIf="!spinner">
           <div class="sk-circle1 sk-child"></div>
@@ -28,25 +49,11 @@
           <div class="sk-circle12 sk-child"></div>
         </div>
 
-        <div *ngIf="spinner" class="d-grid gap-2 d-md-flex justify-content-md-end">
-<!--           <div class=" card-header">
-            <h4 class=" card-title">{{ cursoVidaData[0].NOMBRE }} : {{ total  }}</h4>
-          </div>
-          <div class=" card-header">
-            <h4 class=" card-title"> ATENDIDOS : {{ atendidos[0].atendidos  }}</h4>
-          </div>
-          <div class=" card-header">
-            <h4 class=" card-title"> SIN ATENCIÓN : {{ noAtendidos[0].noAtendidos  }}</h4>
-          </div> -->
-          <button
-          class=" btn btn-link"data-target="#searchModal"data-toggle="modal"
-          (click)="open(content)"
-          id="search-button">
-          <i class=" tim-icons icon-zoom-split"> </i>
-          <span class=" d-lg-none d-md-block"> Search </span>
-        </button>
-        </div>
-        <div class=" card-body">
+        <div
+          *ngIf="spinner"
+          class="d-grid gap-2 d-md-flex justify-content-md-end"
+        ></div>
+        <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="">
               <thead>
@@ -57,26 +64,36 @@
                   <th>APELLIDOS</th>
                   <th>NOMBRES</th>
                   <th>FECHA_ATENCION</th>
-                 <!--  <th>CODIGO</th> -->
+                  <!--  <th>CODIGO</th> -->
                   <th>ATENDIDO</th>
                   <th>CUPS</th>
                   <th>VER</th>
                 </tr>
               </thead>
               <tbody class="data">
-                <tr *ngFor ="let table of cursoVidaData; let i = index">
+                <tr *ngFor="let table of cursoVidaData; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ table.TIPO_DOCUMENTO }}</td>
-                  <td>{{ table.NUMERO_DOCUMENTO }}</td>
+                  <td>{{ table.NUMDOCUM }}</td>
                   <td>{{ table.APELLIDOS }}</td>
                   <td>{{ table.NOMBRES }}</td>
-                  <td>{{ table.ATENCION_FACTURA }}</td>
+                  <td>{{ table.DescripcionServicio }}</td>
                   <!-- <td>{{ table.CODIGO }}</td> -->
-                  <td [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'">{{ table.ATENDIDO }}</td>
-                  <td [ngClass]="table.ATENDIDO == 'SI'? 'darkgreen' : 'darkred'">{{ table.CUPS }}</td>
+                  <td
+                    [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'"
+                  >
+                    {{ table.ATENDIDO }}
+                  </td>
+                  <td
+                    [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'"
+                  >
+                    {{ table.NOMBRE_SERVICIO }}
+                  </td>
                   <td>
-                    <button (click)="modalOpen(pacientesModal, table)" class=" tim-icons icon-bullet-list-67 btn btn-danger btn-sm">
-                    </button>
+                    <button
+                      (click)="modalOpen(pacientesModal, table)"
+                      class="tim-icons icon-bullet-list-67 btn btn-danger btn-sm"
+                    ></button>
                   </td>
                 </tr>
               </tbody>
@@ -88,11 +105,23 @@
             <div class="mr-lg-2">
               <p>total: {{ total }}</p>
             </div>
-            <button class="btn btn-danger btn-sm mr-lg-2" [disabled]="page==1" (click)="pageAtras()"> Atras </button>
+            <button
+              class="btn btn-danger btn-sm mr-lg-2"
+              [disabled]="page == 1"
+              (click)="pageAtras()"
+            >
+              Atras
+            </button>
             <div class="mr-lg-2">
-              <p> {{ page }} - {{ totalpage }}</p>
+              <p>{{ page }} - {{ totalpage }}</p>
             </div>
-            <button class="btn btn-danger btn-sm" [disabled]="islast" (click)="pageSiguiente()"> Siguiente </button>
+            <button
+              class="btn btn-danger btn-sm"
+              [disabled]="islast"
+              (click)="pageSiguiente()"
+            >
+              Siguiente
+            </button>
           </div>
         </div>
       </div>
@@ -101,18 +130,32 @@
 </div>
 <!-- buscar paciente -->
 <ng-template #content let-modal>
-  <div class=" modal-header">
+  <div class="modal-header">
     <input
-      class=" form-control"
+      class="form-control"
       id="inlineFormInputGroup"
-      placeholder="SEARCH"
+      placeholder="Ingresar número de documento separado por , (Ej: 12345678,)"
       (keyup)="buscar($event)"
-      type="text"/>
-    <button aria-label="Close"class=" close"data-dismiss="modal"type="button"(click)="modal.dismiss('Cross click')">
-      <i class=" tim-icons icon-simple-remove"></i>
+      type="text"
+    />
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <i class="tim-icons icon-simple-remove"></i>
     </button>
-    <button aria-label="Close"class=" close"data-dismiss="modal"type="button"(click)="buscarCursoVida1(); modal.dismiss('Cross click')"
-    type="button" class="btn btn-light">
+    <button
+      aria-label="Close"
+      class="close"
+      data-dismiss="modal"
+      type="button"
+      (click)="buscarCursoVida1(); modal.dismiss('Cross click')"
+      type="button"
+      class="btn btn-light"
+    >
       buscar
     </button>
   </div>
@@ -124,37 +167,76 @@
 <!-- fin buscar paciente -->
 
 <!--detalles del paciente-->
-  <ng-template #pacientesModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">HISTORIA DEL PACIENTE</h4>
-      <button type="button"  class=" tim-icons icon-simple-remove btn btn-light" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      </button>
+<ng-template #pacientesModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">HISTORIA DEL PACIENTE</h4>
+    <button
+      type="button"
+      class="tim-icons icon-simple-remove btn btn-light"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <b>NOMBRE IPS:</b> {{ paciente.NOMBRE_IPS }}
+        </li>
+        <li class="list-group-item">
+          <b>TIPO DE DOCUMENTO:</b> {{ paciente.TIPO_DOCUMENTO }}
+        </li>
+        <li class="list-group-item">
+          <b>NÚMERO DOCUMENTO:</b> {{ paciente.NUMDOCUM }}
+        </li>
+        <li class="list-group-item">
+          <b>APELLIDOS:</b> {{ paciente.APELLIDOS }}
+        </li>
+        <li class="list-group-item"><b>NOMBRES:</b> {{ paciente.NOMBRES }}</li>
+        <li class="list-group-item">
+          <b>FECHA NACIMIENTO:</b> {{ paciente.FECHA_NACIMIENTO }}
+        </li>
+        <li class="list-group-item"><b>GENERO:</b> {{ paciente.GENERO }}</li>
+        <li class="list-group-item">
+          <b>EMBARAZO:</b> {{ paciente.EMBARAZO }}
+        </li>
+        <li class="list-group-item">
+          <b>DIRECCIÓN DE RESIDENCIA:</b> {{ paciente.DIRECCION_RECIDENCIA }}
+        </li>
+        <li class="list-group-item">
+          <b>TELÉFONO MÓVIL:</b> {{ paciente.TELEFONO_RECIDENCIA }}
+        </li>
+        <li class="list-group-item"><b>COMUNA:</b> {{ paciente.COMUNA }}</li>
+        <li class="list-group-item">
+          <b>NOMBRE DEL BARRIO:</b> {{ paciente.BARRIO }}
+        </li>
+        <li class="list-group-item"><b>ÉTNICO:</b> {{ paciente.ETNICO }}</li>
+        <li class="list-group-item">
+          <b>NOMBRE DEL PAÍS:</b> {{ paciente.PAIS }}
+        </li>
+        <li class="list-group-item">
+          <b>CODIGO RESPONSABLE DEL SERVICIO:</b> {{ paciente.CODIGO }}
+        </li>
+        <li class="list-group-item">
+          <b>NOMBRE DEL SERVICIO:</b> {{ paciente.NOMBRE_SERVICIO }}
+        </li>
+        <li class="list-group-item">
+          <b>FECHA DE CITA:</b> {{ paciente.ATENCION_FACTURA }}
+        </li>
+        <li class="list-group-item">
+          <b>EDAD DEL PACIENTE:</b> {{ paciente.EDAD }} {{ paciente.FORMEDAD }}
+        </li>
+      </ul>
     </div>
-    <div class="modal-body">
-      <div class=" card-body">
-        <ul class="list-group">
-          <li class="list-group-item"><b>NOMBRE IPS:</b> {{ paciente.NOMBRE_IPS }}</li>
-          <li class="list-group-item"><b>TIPO DE DOCUMENTO:</b> {{ paciente.TIPO_DOCUMENTO }}</li>
-          <li class="list-group-item"><b>NÚMERO DOCUMENTO:</b> {{ paciente.NUMERO_DOCUMENTO }}</li>
-          <li class="list-group-item"><b>APELLIDOS:</b> {{ paciente.APELLIDOS }}</li>
-          <li class="list-group-item"><b>NOMBRES:</b> {{ paciente.NOMBRES }}</li>
-          <li class="list-group-item"><b>FECHA NACIMIENTO:</b> {{ paciente.FECHA_NACIMIENTO }}</li>
-          <li class="list-group-item"><b>GENERO:</b> {{ paciente.SEXO }}</li>
-          <li class="list-group-item"><b>EMBARAZO:</b> {{ paciente.EMBARAZO }}</li>
-          <li class="list-group-item"><b>DIRECCIÓN DE RESIDENCIA:</b> {{ paciente.DIRECCION_RECIDENCIA }}</li>
-          <li class="list-group-item"><b>TELÉFONO MÓVIL:</b> {{ paciente.TELEFONO_RECIDENCIA }}</li>
-          <li class="list-group-item"><b>COMUNA:</b> {{ paciente.COMUNA }}</li>
-          <li class="list-group-item"><b>NOMBRE DEL BARRIO:</b> {{ paciente.BARRIO }}</li>
-          <li class="list-group-item"><b>ÉTNICO:</b> {{ paciente.ETNICO }}</li>
-          <li class="list-group-item"><b>NOMBRE DEL PAÍS:</b> {{ paciente.PAIS }}</li>
-          <li class="list-group-item"><b>NOMBRE DEL SERVICIO:</b> {{ paciente.CUPS }}</li>
-          <li class="list-group-item"><b>FECHA DE CITA:</b> {{ paciente.ATENCION_FACTURA }}</li>
-          <li class="list-group-item"><b>EDAD DEL PACIENTE:</b> {{ paciente.EDAD }} {{ paciente.FORMEDAD }} </li>
-        </ul>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    </div>
-  </ng-template>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
 <!--fin detalles del paciente-->

@@ -3,6 +3,8 @@ import { InfanciaService } from 'src/app/services/infancia.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CursoVidaService } from 'src/app/services/curso-vida.service';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-infancia',
@@ -27,10 +29,10 @@ export class InfanciaComponent implements OnInit {
   public codigo: number = 1601;
   public edadInicial: number = 6;
   public edadFinal: number = 11;
+  public excelData = [];
+  public data = [];
   public excel = "";
   public baseUrl: string = "http://127.0.0.1:3000/exportar-excel1/";
-
-
 
 
   public isCollapsed = true;
@@ -38,29 +40,26 @@ export class InfanciaComponent implements OnInit {
   closeResult: string;
 
   constructor( private cursoVidaService: CursoVidaService,
-    private modalService: NgbModal ) {
+    private modalService: NgbModal, private http: HttpClient, private router: Router ) {
       this.excel = `${this.baseUrl}${this.codigo}/${this.edadInicial}/${this.edadFinal}`
     }
 
   ngOnInit(): void {
     this.obtenerCursoVida();
+    this.spinner;
 
   }
 
   obtenerCursoVida() {
-    this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
+    this.cursoVidaService.obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
     this.total = res.total
     this.itemperpage = res.itemperpage
     this.totalpage = res.totalpage
     this.islast = res.islast
     this.cursoVidaData = res.data;
-    this.atendidos = res.atendidos
-    this.noAtendidos = res.noAtendidos
     this.spinner = true
-    this.arrayId = [];
-
-    }
-    );
+    this.arrayId = []
+    });
   }
   public buscarCursoVida1() {
     this.cursoVidaService.buscarCursoVida(this.page, this.arrayId, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
@@ -69,16 +68,11 @@ export class InfanciaComponent implements OnInit {
     this.totalpage = res.totalpage
     this.islast = res.islast
     this.cursoVidaData = res.data;
-    this.atendidos = res.atendidos
-    this.noAtendidos = res.noAtendidos
     this.spinner = true
     this.isSearch = true
 
     }, (error) => {
-      console.log(error);
-
       if (error.status === 404) {
-        console.log('No pertenece');
         Swal.fire({
           position: 'center',
           icon: 'error',
@@ -89,16 +83,16 @@ export class InfanciaComponent implements OnInit {
         })
 
       }
-      /* console.log(error.status, 'Este es el error'); */
 
     }
+
     );
   }
 
 
   public pageSiguiente() {
     this.page = this.page + 1
-    console.log(this.isSearch);
+
 
     if(this.isSearch){
         this.buscarCursoVida1()
@@ -110,7 +104,7 @@ export class InfanciaComponent implements OnInit {
         this.islast = res.islast
         this.cursoVidaData = res.data;
         this.arrayId = [];
-
+        this.spinner = true
 
         }
         );
@@ -131,6 +125,7 @@ export class InfanciaComponent implements OnInit {
         this.islast = res.islast
         this.cursoVidaData = res.data;
         this.arrayId = [];
+        this.spinner = true
 
         }
         );
@@ -148,7 +143,7 @@ export class InfanciaComponent implements OnInit {
   modalOpen( basicmodal:any, paciente ){
     this.modalService.open( basicmodal, { size: 'lg',  scrollable: true });
     this.paciente = paciente;
-    console.log(this.paciente);
+
 
   }
 
@@ -165,13 +160,21 @@ export class InfanciaComponent implements OnInit {
   public buscar(event: any) {
     let identificacion: string = event.target.value
     if(identificacion.includes(',')){
-      console.log(identificacion.substring(0, identificacion.length-1));
       this.arrayId.push(identificacion.substring(0, identificacion.length-1));
-      console.log(this.arrayId);
       event.target.value = ''
 
     }
 
+  }
+
+  reloadPage() {
+    // Obtiene la URL actual
+    const currentUrl = this.router.url;
+
+    // Navega a la misma URL para recargar la página
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 
 }

@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CursoVidaService } from 'src/app/services/curso-vida.service';
 import Swal from 'sweetalert2';
@@ -38,29 +40,25 @@ export class AdolecenciaComponent implements OnInit {
   closeResult: string;
 
   constructor( private cursoVidaService: CursoVidaService,
-    private modalService: NgbModal ) {
+    private modalService: NgbModal, private http: HttpClient, private router: Router ) {
       this.excel = `${this.baseUrl}${this.codigo}/${this.edadInicial}/${this.edadFinal}`
     }
 
   ngOnInit(): void {
     this.obtenerCursoVida();
+    this.spinner;
 
   }
 
   obtenerCursoVida() {
-    this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
-
-
+    this.cursoVidaService.obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
     this.total = res.total
     this.itemperpage = res.itemperpage
     this.totalpage = res.totalpage
     this.islast = res.islast
     this.cursoVidaData = res.data;
-    this.atendidos = res.atendidos
-    this.noAtendidos = res.noAtendidos
     this.spinner = true
     this.arrayId = []
-
     });
   }
   public buscarCursoVida1() {
@@ -70,14 +68,11 @@ export class AdolecenciaComponent implements OnInit {
     this.totalpage = res.totalpage
     this.islast = res.islast
     this.cursoVidaData = res.data;
-    this.atendidos = res.atendidos
-    this.noAtendidos = res.noAtendidos
     this.spinner = true
     this.isSearch = true
 
     }, (error) => {
       if (error.status === 404) {
-        console.log('No pertenece');
         Swal.fire({
           position: 'center',
           icon: 'error',
@@ -170,6 +165,16 @@ export class AdolecenciaComponent implements OnInit {
 
     }
 
+  }
+
+  reloadPage() {
+    // Obtiene la URL actual
+    const currentUrl = this.router.url;
+
+    // Navega a la misma URL para recargar la página
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 
 }

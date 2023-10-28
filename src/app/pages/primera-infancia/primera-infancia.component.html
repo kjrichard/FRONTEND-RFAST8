@@ -31,6 +31,7 @@
             class="btn btn-danger btn-sm"
             >DESCARGAR EXCEL</a
           >
+          <a (click)="reloadPage()" class="btn btn-danger btn-sm">ATRAS</a>
         </div>
 
         <div class="sk-circle" *ngIf="!spinner">
@@ -51,17 +52,7 @@
         <div
           *ngIf="spinner"
           class="d-grid gap-2 d-md-flex justify-content-md-end"
-        >
-          <!--           <div class=" card-header">
-            <h4 class=" card-title">{{ cursoVidaData[0].NOMBRE }} : {{ total }} </h4>
-          </div>
-          <div class=" card-header">
-            <h4 class=" card-title"> ATENDIDOS : {{ atendidos[0].atendidos  }}</h4>
-          </div>
-          <div class=" card-header">
-            <h4 class=" card-title"> SIN ATENCIÓN : {{ noAtendidos[0].noAtendidos  }}</h4>
-          </div> -->
-        </div>
+        ></div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="">
@@ -83,10 +74,10 @@
                 <tr *ngFor="let table of cursoVidaData; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ table.TIPO_DOCUMENTO }}</td>
-                  <td>{{ table.NUMERO_DOCUMENTO }}</td>
+                  <td>{{ table.NUMDOCUM }}</td>
                   <td>{{ table.APELLIDOS }}</td>
                   <td>{{ table.NOMBRES }}</td>
-                  <td>{{ table.ATENCION_FACTURA }}</td>
+                  <td>{{ table.DescripcionServicio }}</td>
                   <!-- <td>{{ table.CODIGO }}</td> -->
                   <td
                     [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'"
@@ -96,7 +87,7 @@
                   <td
                     [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'"
                   >
-                    {{ table.DescripcionServicio }}
+                    {{ table.NOMBRE_SERVICIO }}
                   </td>
                   <td>
                     <button
@@ -143,7 +134,7 @@
     <input
       class="form-control"
       id="inlineFormInputGroup"
-      placeholder="SEARCH"
+      placeholder="Ingresar número de documento separado por , (Ej: 12345678,)"
       (keyup)="buscar($event)"
       type="text"
     />
@@ -196,7 +187,7 @@
           <b>TIPO DE DOCUMENTO:</b> {{ paciente.TIPO_DOCUMENTO }}
         </li>
         <li class="list-group-item">
-          <b>NÚMERO DOCUMENTO:</b> {{ paciente.NUMERO_DOCUMENTO }}
+          <b>NÚMERO DOCUMENTO:</b> {{ paciente.NUMDOCUM }}
         </li>
         <li class="list-group-item">
           <b>APELLIDOS:</b> {{ paciente.APELLIDOS }}
@@ -227,7 +218,7 @@
           <b>CODIGO RESPONSABLE DEL SERVICIO:</b> {{ paciente.CODIGO }}
         </li>
         <li class="list-group-item">
-          <b>NOMBRE DEL SERVICIO:</b> {{ paciente.DescripcionServicio }}
+          <b>NOMBRE DEL SERVICIO:</b> {{ paciente.NOMBRE_SERVICIO }}
         </li>
         <li class="list-group-item">
           <b>FECHA DE CITA:</b> {{ paciente.ATENCION_FACTURA }}

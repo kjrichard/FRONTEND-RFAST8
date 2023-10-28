@@ -5,6 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CursoVidaService } from 'src/app/services/curso-vida.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,8 +20,6 @@ export class PrimeraInfanciaComponent implements OnInit {
   public totalpage = 0;
   public itemperpage = 0;
   public islast = false;
-  public atendidos = 0;
-  public noAtendidos = 0;
   public toggleButton: any;
   public paciente = {};
   public spinner = false;
@@ -32,22 +31,19 @@ export class PrimeraInfanciaComponent implements OnInit {
   public excelData = [];
   public data = [];
   public excel = "";
-  public baseUrl: string = "http://127.0.0.1:3000/exportar-excel/";
-
- // public codigoServiciosDisponibles: string[] = [];
+  public baseUrl: string = "http://127.0.0.1:3000/exportar-excel0/";
 
   public isCollapsed = true;
 
   closeResult: string;
 
   constructor( private cursoVidaService: CursoVidaService,
-    private modalService: NgbModal, private http: HttpClient ) {
+    private modalService: NgbModal, private http: HttpClient,private router: Router ) {
       this.excel = `${this.baseUrl}${this.codigo}/${this.edadInicial}/${this.edadFinal}`
     }
 
   ngOnInit(): void {
     this.obtenerCursoVida();
-    //this.filtrarCodigoServiciosDisponibles();
     this.spinner;
   }
 
@@ -58,27 +54,10 @@ export class PrimeraInfanciaComponent implements OnInit {
     this.totalpage = res.totalpage
     this.islast = res.islast
     this.cursoVidaData = res.data;
-    this.atendidos = res.atendidos
-    this.noAtendidos = res.noAtendidos
     this.spinner = true
     this.arrayId = []
-    console.log(this.cursoVidaData);
     });
   }
-
-  /* filtrarCodigoServiciosDisponibles() {
-    for (const data of this.cursoVidaData) {
-      for (const codigoServicio of Object.keys(data)) {
-        if (data[codigoServicio] !== null) {
-          // Si el valor no es null, agrégalo a la lista de códigos disponibles
-          if (!this.codigoServiciosDisponibles.includes(codigoServicio)) {
-            this.codigoServiciosDisponibles.push(codigoServicio);
-          }
-        }
-      }
-    }
-  }
- */
   public buscarCursoVida1() {
     this.cursoVidaService.buscarCursoVida(this.page, this.arrayId, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
     this.total = res.total
@@ -86,8 +65,6 @@ export class PrimeraInfanciaComponent implements OnInit {
     this.totalpage = res.totalpage
     this.islast = res.islast
     this.cursoVidaData = res.data;
-    this.atendidos = res.atendidos
-    this.noAtendidos = res.noAtendidos
     this.spinner = true
     this.isSearch = true
 
@@ -187,14 +164,16 @@ export class PrimeraInfanciaComponent implements OnInit {
 
   }
 
-   /*   Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Descargando.... : ',
-        text: `descarga exitosa`,
-        showConfirmButton: false,
-        timer: 1500
-      }) */
+  reloadPage() {
+    // Obtiene la URL actual
+    const currentUrl = this.router.url;
+
+    // Navega a la misma URL para recargar la página
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
 }
 
 

@@ -246,6 +246,34 @@
       vertical-align: middle;
       margin-right: 10px;
     }
+    .search-box {
+      position: relative;
+      float: none;
+    }
+
+    .search-box .input-container {
+      display: flex;
+      align-items: end;
+      border: 2px solid #d1d1d1;
+      border-radius: 14px;
+      padding: 0px;
+    }
+
+    .search-box .input-container .search-icon {
+      margin-right: 10px; /* Espacio entre el ícono de búsqueda y el campo de entrada */
+      margin-left: 8px;
+    }
+
+    .search-box .input-container input {
+      flex: 1;
+      outline: none;
+      color: #cacaca;
+    }
+
+    .search-icon i.material-icons {
+      color: #383737; /* Cambiar el color a tu preferencia, por ejemplo, rojo (#FF0000) */
+    }
+
     .pagination {
       float: right;
       margin: 0 0 5px;
@@ -401,21 +429,36 @@
   });
   </script> -->
 
-  <!-- tabla pprueba -->
+  <!-- tabla prueba -->
   <div class="container-xl">
     <div class="table-responsive">
       <div class="table-wrapper">
         <div class="table-title">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <h2><b>Lista Usuarios</b></h2>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <button class="btn btn-danger btn-sm">
-                <a class="a" href="#addEmployeeModal" data-toggle="modal"
-                  ><i class="material-icons">&#xE147;</i> <span>Crear</span></a
+                <a class="a" href="#addEmployeeModal" data-toggle="modal">
+                  <i class="material-icons">&#xE147;</i> <span>Crear</span></a
                 >
               </button>
+            </div>
+            <div class="col-sm-5">
+              <div class="search-box">
+                <div class="input-container">
+                  <a href="#" class="search-icon">
+                    <i class="material-icons">&#xE8B6;</i>
+                  </a>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search&hellip;"
+                    id="search-input"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
