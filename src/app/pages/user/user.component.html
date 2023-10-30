@@ -254,20 +254,28 @@
     .search-box .input-container {
       display: flex;
       align-items: end;
-      border: 2px solid #d1d1d1;
+      border: 0px solid #c1c1c1;
       border-radius: 14px;
       padding: 0px;
     }
 
     .search-box .input-container .search-icon {
-      margin-right: 10px; /* Espacio entre el ícono de búsqueda y el campo de entrada */
-      margin-left: 8px;
+      margin-right: 5px; /* Espacio entre el ícono de búsqueda y el campo de entrada */
+      margin-left: 10px;
     }
 
     .search-box .input-container input {
       flex: 1;
       outline: none;
-      color: #cacaca;
+      color: #000000;
+    }
+
+    .form-control {
+      border-color: #ffffff;
+      border-radius: 11.4285rem;
+      font-size: 0.7500000025rem;
+      transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+        background-color 0.3s ease-in-out;
     }
 
     .search-icon i.material-icons {
@@ -403,32 +411,6 @@
     }
   </style>
 
-  <!-- <script>
-  $(document).ready(function(){
-    // Activate tooltip
-    $('[data-toggle="tooltip"]').tooltip();
-
-    // Select/Deselect checkboxes
-    var checkbox = $('table tbody input[type="checkbox"]');
-    $("#selectAll").click(function(){
-      if(this.checked){
-        checkbox.each(function(){
-          this.checked = true;
-        });
-      } else{
-        checkbox.each(function(){
-          this.checked = false;
-        });
-      }
-    });
-    checkbox.click(function(){
-      if(!this.checked){
-        $("#selectAll").prop("checked", false);
-      }
-    });
-  });
-  </script> -->
-
   <!-- tabla prueba -->
   <div class="container-xl">
     <div class="table-responsive">
@@ -454,7 +436,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Search&hellip;"
+                    placeholder="Digitar Correo Electronico&hellip;"
                     id="search-input"
                   />
                 </div>
@@ -493,13 +475,7 @@
                     >&#xE254;</i
                   >
                 </a>
-                <!-- <a
-                  href="#deleteEmployeeModal"
-                  class="delete"
-                  data-toggle="modal"
-                >
-                  <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                </a> -->
+
                 <a (click)="toggleEstado(table)" class="toggle">
                   <i
                     class="material-icons"
@@ -692,39 +668,4 @@
       </form>
     </div>
   </ng-template>
-  <!-- Delete Modal HTML -->
-  <!-- <div id="deleteEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <form>
-          <div class="modal-header">
-            <h4 class="modal-title">Delete Employee</h4>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-hidden="true"
-            >
-              &times;
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Are you sure you want to delete these Records?</p>
-            <p class="text-warning">
-              <small>This action cannot be undone.</small>
-            </p>
-          </div>
-          <div class="modal-footer">
-            <input
-              type="button"
-              class="btn btn-default"
-              data-dismiss="modal"
-              value="Cancel"
-            />
-            <input type="submit" class="btn btn-danger" value="Delete" />
-          </div>
-        </form>
-      </div>
-    </div>
-  </div> -->
 </div>
