@@ -94,6 +94,7 @@ export class VejezComponent implements OnInit {
 
   public pageSiguiente() {
     this.page = this.page + 1
+    /* this.totalpage = this.totalpage - 1 */
 
 
     if(this.isSearch){
@@ -102,6 +103,7 @@ export class VejezComponent implements OnInit {
       this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
         this.total = res.total
         this.itemperpage = res.itemperpage
+        this.incrementarTotalPage();
         this.totalpage = res.totalpage
         this.islast = res.islast
         this.cursoVidaData = res.data;
@@ -115,14 +117,20 @@ export class VejezComponent implements OnInit {
 
   }
 
+  public incrementarTotalPage() {
+    this.totalpage = Math.min(this.totalpage + 1, Math.ceil(this.total / this.itemperpage));
+  }
+
   public pageAtras() {
     this.page = this.page - 1
+    /* this.totalpage = this.totalpage + 1 */
     if(this.isSearch){
       this.buscarCursoVida1()
     }else{
       this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
-        this.total = res.total
-        this.itemperpage = res.itemperpage
+        this.total = res.total;
+        this.itemperpage = res.itemperpage;
+        this.decrementarTotalPage();
         this.totalpage = res.totalpage
         this.islast = res.islast
         this.cursoVidaData = res.data;
@@ -133,6 +141,10 @@ export class VejezComponent implements OnInit {
         );
     }
 
+  }
+
+  public decrementarTotalPage() {
+    this.totalpage = Math.max(this.totalpage - 1, 1);
   }
 
    open(content) {

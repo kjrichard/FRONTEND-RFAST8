@@ -72,24 +72,26 @@
               </thead>
               <tbody class="data">
                 <tr *ngFor="let table of cursoVidaData; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ table.TIPO_DOCUMENTO }}</td>
-                  <td>{{ table.NUMDOCUM }}</td>
-                  <td>{{ table.APELLIDOS }}</td>
-                  <td>{{ table.NOMBRES }}</td>
-                  <td>{{ table.DescripcionServicio }}</td>
+                  <td *ngIf="table.NOMBRES">{{ i + 1 }}</td>
+                  <td *ngIf="table.NOMBRES">{{ table.TIPO_DOCUMENTO }}</td>
+                  <td *ngIf="table.NOMBRES">{{ table.NUMDOCUM }}</td>
+                  <td *ngIf="table.NOMBRES">{{ table.APELLIDOS }}</td>
+                  <td *ngIf="table.NOMBRES">{{ table.NOMBRES }}</td>
+                  <td *ngIf="table.NOMBRES">{{ table.DescripcionServicio }}</td>
                   <!-- <td>{{ table.CODIGO }}</td> -->
                   <td
+                    *ngIf="table.NOMBRES"
                     [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'"
                   >
                     {{ table.ATENDIDO }}
                   </td>
                   <td
+                    *ngIf="table.NOMBRES"
                     [ngClass]="table.ATENDIDO == 'SI' ? 'darkgreen' : 'darkred'"
                   >
                     {{ table.NOMBRE_SERVICIO }}
                   </td>
-                  <td>
+                  <td *ngIf="table.NOMBRES">
                     <button
                       (click)="modalOpen(pacientesModal, table)"
                       class="tim-icons icon-bullet-list-67 btn btn-danger btn-sm"
@@ -108,7 +110,7 @@
             <button
               class="btn btn-danger btn-sm mr-lg-2"
               [disabled]="page == 1"
-              (click)="pageAtras()"
+              (click)="pageAtras(); incrementarTotalPage()"
             >
               Atras
             </button>
@@ -118,7 +120,7 @@
             <button
               class="btn btn-danger btn-sm"
               [disabled]="islast"
-              (click)="pageSiguiente()"
+              (click)="pageSiguiente(); decrementarTotalPage()"
             >
               Siguiente
             </button>

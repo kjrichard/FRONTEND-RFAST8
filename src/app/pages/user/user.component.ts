@@ -72,6 +72,15 @@ export class UserComponent implements OnInit {
       this.listaPerfiles = res.data;
     });
   }
+  buscarUsuario(parametro: any) {
+
+    if (parametro.length === 0) {
+      this.obtenerUsuario();
+    }
+    this.usuariosService.buscarUsuario(parametro).subscribe((res: any) => {
+      this.listaUsuarios = res.data;
+    });
+  }
 
   obtenerPermisos() {
     this.usuariosService.obtenerPermisos().subscribe((res: any) => {

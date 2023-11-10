@@ -435,6 +435,8 @@
                   </a>
                   <input
                     type="text"
+                    #parametro
+                    (keyup)="buscarUsuario(parametro.value)"
                     class="form-control"
                     placeholder="Digitar Correo Electronico&hellip;"
                     id="search-input"

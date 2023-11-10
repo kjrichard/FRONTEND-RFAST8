@@ -40,12 +40,15 @@ export class PrimeraInfanciaComponent implements OnInit {
   constructor( private cursoVidaService: CursoVidaService,
     private modalService: NgbModal, private http: HttpClient,private router: Router ) {
       this.excel = `${this.baseUrl}${this.codigo}/${this.edadInicial}/${this.edadFinal}`
+      /* this.page = 1; */
     }
 
   ngOnInit(): void {
     this.obtenerCursoVida();
     this.spinner;
   }
+
+
 
   obtenerCursoVida() {
     this.cursoVidaService.obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
@@ -89,6 +92,7 @@ export class PrimeraInfanciaComponent implements OnInit {
 
   public pageSiguiente() {
     this.page = this.page + 1
+    /* this.totalpage = this.totalpage - 1 */
 
 
     if(this.isSearch){
@@ -97,6 +101,7 @@ export class PrimeraInfanciaComponent implements OnInit {
       this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
         this.total = res.total
         this.itemperpage = res.itemperpage
+        this.incrementarTotalPage();
         this.totalpage = res.totalpage
         this.islast = res.islast
         this.cursoVidaData = res.data;
@@ -108,16 +113,22 @@ export class PrimeraInfanciaComponent implements OnInit {
     }
 
 
+  }
+
+  public incrementarTotalPage() {
+    this.totalpage = Math.min(this.totalpage + 1, Math.ceil(this.total / this.itemperpage));
   }
 
   public pageAtras() {
     this.page = this.page - 1
+    /* this.totalpage = this.totalpage + 1 */
     if(this.isSearch){
       this.buscarCursoVida1()
     }else{
       this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
-        this.total = res.total
-        this.itemperpage = res.itemperpage
+        this.total = res.total;
+        this.itemperpage = res.itemperpage;
+        this.decrementarTotalPage();
         this.totalpage = res.totalpage
         this.islast = res.islast
         this.cursoVidaData = res.data;
@@ -130,7 +141,12 @@ export class PrimeraInfanciaComponent implements OnInit {
 
   }
 
-   open(content) {
+  public decrementarTotalPage() {
+    this.totalpage = Math.max(this.totalpage - 1, 1);
+  }
+
+
+  open(content) {
     this.modalService.open(content, {windowClass: 'modal-search'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

@@ -36,6 +36,11 @@ export class UsuariosService {
       headers: { 'x-token': this.token }
     } );
   }
+  buscarUsuario(parametro: any) {
+    return this.http.get(`${ urlApi }/buscar-usuario/${parametro}`, {
+      headers: { 'x-token': this.token }
+    } );
+  }
 
 
   crearUsuario(usuario: any) {

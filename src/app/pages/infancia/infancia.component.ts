@@ -42,6 +42,7 @@ export class InfanciaComponent implements OnInit {
   constructor( private cursoVidaService: CursoVidaService,
     private modalService: NgbModal, private http: HttpClient, private router: Router ) {
       this.excel = `${this.baseUrl}${this.codigo}/${this.edadInicial}/${this.edadFinal}`
+      this.page = 1;
     }
 
   ngOnInit(): void {
@@ -92,6 +93,7 @@ export class InfanciaComponent implements OnInit {
 
   public pageSiguiente() {
     this.page = this.page + 1
+    /* this.totalpage = this.totalpage - 1 */
 
 
     if(this.isSearch){
@@ -100,6 +102,7 @@ export class InfanciaComponent implements OnInit {
       this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
         this.total = res.total
         this.itemperpage = res.itemperpage
+        this.incrementarTotalPage();
         this.totalpage = res.totalpage
         this.islast = res.islast
         this.cursoVidaData = res.data;
@@ -113,14 +116,20 @@ export class InfanciaComponent implements OnInit {
 
   }
 
+  public incrementarTotalPage() {
+    this.totalpage = Math.min(this.totalpage + 1, Math.ceil(this.total / this.itemperpage));
+  }
+
   public pageAtras() {
     this.page = this.page - 1
+    /* this.totalpage = this.totalpage + 1 */
     if(this.isSearch){
       this.buscarCursoVida1()
     }else{
       this.cursoVidaService. obtenerCursoVida(this.page, this.codigo, this.edadInicial, this.edadFinal).subscribe( ( res: any ) => {
-        this.total = res.total
-        this.itemperpage = res.itemperpage
+        this.total = res.total;
+        this.itemperpage = res.itemperpage;
+        this.decrementarTotalPage();
         this.totalpage = res.totalpage
         this.islast = res.islast
         this.cursoVidaData = res.data;
@@ -131,6 +140,10 @@ export class InfanciaComponent implements OnInit {
         );
     }
 
+  }
+
+  public decrementarTotalPage() {
+    this.totalpage = Math.max(this.totalpage - 1, 1);
   }
 
    open(content) {
