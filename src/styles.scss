@@ -273,8 +273,7 @@ tbody{
   label {
     display: inline-block;
     margin-bottom: -0.5rem !important;
-}
-
+  }
 }
 
 /* Estilo personalizado para checkboxes */
@@ -306,9 +305,11 @@ tbody{
   padding: 10px 29px;
 }
 
-
-
-
+.form-group {
+  border-radius: -1px;
+  box-shadow: none;
+  border-color: #000000;
+}
 
 /* footer */
 

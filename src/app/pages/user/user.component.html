@@ -380,9 +380,10 @@
     .modal .modal-footer {
       padding: 20px 30px;
     }
-    .modal .modal-content {
-      border-radius: 3px;
+    .modal-content {
+      border-radius: -2px;
       font-size: 14px;
+      width: 110% !important;
     }
     .modal .modal-footer {
       background: #ecf0f1;
@@ -391,10 +392,15 @@
     .modal .modal-title {
       display: inline-block;
     }
+    /* modal crear y editar */
     .modal .form-control {
-      border-radius: 2px;
+      border-radius: -1px;
       box-shadow: none;
-      border-color: #dddddd;
+      border-color: #000000;
+    }
+    .form-control {
+      color: #212529;
+      border-color: #000000;
     }
     .modal textarea.form-control {
       resize: vertical;
@@ -405,9 +411,6 @@
     }
     .modal form label {
       font-weight: normal;
-    }
-    .form-control {
-      color: #212529;
     }
   </style>
 

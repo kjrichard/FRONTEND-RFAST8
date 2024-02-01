@@ -76,7 +76,7 @@ export class PrimeraInfanciaComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: 'Este Documento: ',
+          title: 'Este Numero de Documento: ',
           text: `${this.arrayId}, No Pertenece a este Curso de Vida`,
           showConfirmButton: false,
           timer: 6500
